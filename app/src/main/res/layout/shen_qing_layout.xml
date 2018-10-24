@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/title_top"
+        layout="@layout/title_layout" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefres"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_top">
+
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/second_commit_btn"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="65dp"
+                android:layout_marginRight="65dp"
+                android:layout_marginTop="250dp"
+                android:background="@drawable/btn_background"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="立即申请"
+                android:textColor="#fff"
+                android:textSize="15dp" />
+
+            <RelativeLayout
+                android:id="@+id/content_layout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="150dp"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/name_shenq"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入姓名"
+                    android:maxLines="1"
+                    android:textColor="@color/text_default_d"
+                    android:textColorHint="@color/text_default_l"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/name"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="32dp"
+                    android:background="#999" />
+
+                <EditText
+                    android:id="@+id/id_cord"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/line1"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/idcoed"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入身份证"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/text_default_d"
+                    android:textColorHint="@color/text_default_l"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/id_cord"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="32dp"
+                    android:background="#999" />
+
+                <EditText
+                    android:id="@+id/yinhanka"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/line2"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/yinhangka"
+                    android:drawablePadding="12dp"
+                    android:hint="请输入银行卡号"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/text_default_d"
+                    android:textColorHint="@color/text_default_l"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/yinhanka"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="2dp"
+                    android:background="#999" />
+
+                <TextView
+                    android:id="@+id/commit_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/line3"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="60dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/btn_background"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="提交"
+                    android:textColor="#fff"
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/login_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/logintxt"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="未登录，请先进行登录"/>
+
+                <TextView
+                    android:id="@+id/login_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/logintxt"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginRight="65dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/btn_background"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="登录"
+                    android:textColor="#fff"
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
+
+
+            <include
+                android:id="@+id/other_layout"
+                layout="@layout/shen_qing_other"
+                android:visibility="gone" />
+
+            <include
+                android:id="@+id/pay_layout"
+                android:visibility="gone"
+                layout="@layout/other_layout_pay" />
+
+            <include
+                android:visibility="gone"
+                android:id="@+id/perfect_layout"
+                layout="@layout/is_perfect_layout"/>
+
+
+            <TextView
+                android:id="@+id/tip_txt"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"/>
+
+        </RelativeLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+
+</RelativeLayout>

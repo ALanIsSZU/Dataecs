@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title_layout"
+        layout="@layout/title_layout" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/company_name"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="50dp"
+                android:background="@color/white"
+                android:drawablePadding="12dp"
+                android:hint="所在企业"
+                android:maxLines="1"
+                android:textColor="@color/text_default_d"
+                android:textColorHint="@color/text_default_l"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_below="@+id/logo"
+                android:layout_marginTop="6dp"
+                android:background="#F2F2F2" />
+
+            <EditText
+                android:id="@+id/company_location"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/company_name"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:drawablePadding="12dp"
+                android:hint="企业所在位置"
+                android:maxLines="3"
+                android:textColor="@color/text_default_d"
+                android:textColorHint="@color/text_default_l"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_below="@+id/logo"
+                android:layout_marginTop="6dp"
+                android:background="#F2F2F2" />
+
+            <EditText
+                android:id="@+id/company_work"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/company_location"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:drawablePadding="12dp"
+                android:hint="职位"
+                android:maxLines="1"
+                android:textColor="@color/text_default_d"
+                android:textColorHint="@color/text_default_l"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_below="@+id/logo"
+                android:layout_marginTop="5dp"
+                android:background="#F2F2F2" />
+
+            <EditText
+                android:id="@+id/work_time"
+                android:layout_below="@+id/company_work"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:drawablePadding="12dp"
+                android:hint="工作时长"
+                android:maxLines="1"
+                android:textColor="@color/text_default_d"
+                android:textColorHint="@color/text_default_l"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_below="@+id/logo"
+                android:layout_marginTop="6dp"
+                android:background="#F2F2F2" />
+
+            <EditText
+                android:id="@+id/work_money"
+                android:layout_below="@+id/work_time"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:drawablePadding="12dp"
+                android:hint="个人待遇"
+                android:maxLines="1"
+                android:textColor="@color/text_default_d"
+                android:textColorHint="@color/text_default_l"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_below="@+id/logo"
+                android:layout_marginTop="5dp"
+                android:background="#F2F2F2" />
+
+            <TextView
+                android:id="@+id/login_btn"
+                android:background="@drawable/btn_background"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:text="确定"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:textColor="#fff"
+                android:padding="5dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/work_info"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
