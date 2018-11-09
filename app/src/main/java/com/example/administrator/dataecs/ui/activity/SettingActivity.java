@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.dataecs.R;
+import com.example.administrator.dataecs.util.BaseServer;
+import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.SharePreferencesUtil;
+import com.example.administrator.dataecs.util.Tools;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,11 +29,15 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.aboutUs)
-    LinearLayout aboutUs;
-    @BindView(R.id.commonProblem)
-    LinearLayout commonProblem;
+    RelativeLayout aboutUs;
     @BindView(R.id.exit_login)
     TextView exitLogin;
+    @BindView(R.id.code_txt)
+    TextView codeTxt;
+    @BindView(R.id.ban_ben_code)
+    TextView banBenCode;
+
+    String verSonName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,34 +51,34 @@ public class SettingActivity extends BaseActivity {
 
         back.setVisibility(View.VISIBLE);
         title.setText("设置");
-        if (SharePreferencesUtil.getUserName(this).equals("")){
+
+        verSonName= Tools.getVersionName(this);
+        codeTxt.setText("版本号 "+verSonName);
+        banBenCode.setText(verSonName);
+
+        if (SharePreferencesUtil.getUserName(this).equals("")) {
             exitLogin.setVisibility(View.GONE);
-        }else {
+        } else {
             exitLogin.setVisibility(View.VISIBLE);
         }
     }
 
-    @OnClick({R.id.aboutUs, R.id.commonProblem, R.id.back, R.id.exit_login})
+    @OnClick({R.id.aboutUs, R.id.back, R.id.exit_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.aboutUs:
                 Intent intent = new Intent(this, AboutuActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.commonProblem:
-                Intent intent1 = new Intent(this, WebActivity.class);
-                Bundle bundle1 = new Bundle();
-                bundle1.putString("title", "常见问题");
-                bundle1.putString("url", "https://www.baidu.com/");
-                intent1.putExtra("data", bundle1);
-                startActivity(intent1);
-                break;
             case R.id.back:
                 finish();
                 break;
             case R.id.exit_login:
-                SharePreferencesUtil.saveUserInfo(this,"");
-                SharePreferencesUtil.saveShenQing(this,4);
+                SharePreferencesUtil.saveUserInfo(this, "");
+                SharePreferencesUtil.saveShenQing(this, 4);
+                SPUtils.put(this, BaseServer.BANCK_INFORMATION,false);
+                SPUtils.put(this, BaseServer.ID_INFORMATION,false);
+                SPUtils.put(this, BaseServer.ALL_ATTESTATION,false);
                 finish();
                 break;
         }

@@ -1,6 +1,7 @@
 package com.example.administrator.dataecs.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,19 +60,16 @@ public class RecordAdapter extends BaseAdapter {
 
         }
 
-        holder.number.setText("手机：" + list.get(i).getNumber());
-        holder.name.setText("姓名：" + list.get(i).getName());
 
 
-        holder.channel.setText("渠道：" + list.get(i).getSourceId());
+        holder.number.setText(Html.fromHtml("手机：<font color='#666666'><small>"+list.get(i).getUserMobile()+"</small></font>"));
+        holder.name.setText(Html.fromHtml("姓名：<font color='#666666'><small>"+list.get(i).getName()+"</small></font>"));
 
-        if (list.get(i).getRepayStatus() == null || list.get(i).getRepayStatus().equals("")||list.get(i).getRepayStatus().equals("未还款")) {
-            holder.moneyType.setText("还款状态: 待还款");
-        } else {
 
-            holder.moneyType.setText("还款状态:" + list.get(i).getRepayStatus());
+        holder.channel.setText(Html.fromHtml("渠道：<font color='#666666'><small>"+list.get(i).getSource()+"</small></font>"));
 
-        }
+            holder.moneyType.setText(Html.fromHtml("还款状态: <font color='#666666'><small>"+"已还款"+"</small></font>"));
+
 
         return view;
     }

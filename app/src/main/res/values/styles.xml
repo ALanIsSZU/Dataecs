@@ -58,4 +58,10 @@
         <item name="android:windowEnterAnimation">@anim/pop_up_to_down_enter</item>
         <item name="android:windowExitAnimation">@anim/pop_down_to_up_exit</item>
     </style>
+
+    <!--认证界面的文字-->
+    <style name="ren_zhen_txt">
+        <item name="android:textSize">13sp</item>
+    </style>
+
 </resources>

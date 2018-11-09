@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout tab4;
 
     // 首页、分类、我的、申请
-    private TabClassiFicationFragement cfFragement;
     private TabMainFragement mainFragement;
+    private TabClassiFicationFragement cfFragement;
     private TabMeFragement meFragement;
     private TabShenQingFragement sQFragement;
     private FragmentManager fragmentManager;

@@ -119,7 +119,6 @@ public class Startactivity extends AppCompatActivity {
                 finish();
             } else {
                 //没有这个权限，处理的逻辑
-//                    finish();
                 AndPermission.defaultSettingDialog(Startactivity.this, BaseServer.START_FAIL)
                         .setTitle("申请权限")
                         .setMessage("米店 需要使用存储空间权限，保存文件。")

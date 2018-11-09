@@ -1,10 +1,8 @@
 package com.example.administrator.dataecs.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +14,7 @@ import com.example.administrator.dataecs.inte.AllInte;
 import com.example.administrator.dataecs.model.BanckCommitModle;
 import com.example.administrator.dataecs.model.JinJiRequestModle;
 import com.example.administrator.dataecs.util.BaseServer;
+import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.SharePreferencesUtil;
 import com.example.administrator.dataecs.util.StringUtil;
 import com.example.administrator.dataecs.util.SystemUntils;
@@ -74,10 +73,6 @@ public class AddBanckCardActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
-                Intent intent=new Intent();
-                intent.putExtra("add_banck_go",isPerfect);
-                setResult(BaseServer.ADDBANCK_TO_BANCK,intent);
-                finish();
 
                 finish();
                 break;
@@ -139,10 +134,8 @@ public class AddBanckCardActivity extends AppCompatActivity {
                 if (modle.getMap().getCode() == 0) {
                     //添加成功
                     ToastUntils.ToastShort(AddBanckCardActivity.this, modle.getMap().getResult());
-                    isPerfect=true;
-                    Intent intent=new Intent();
-                    intent.putExtra("add_banck_go",isPerfect);
-                    setResult(BaseServer.ADDBANCK_TO_BANCK,intent);
+
+                    SPUtils.put(AddBanckCardActivity.this,BaseServer.BANCK_INFORMATION,true);
                     finish();
                 } else {
                     //添加失败
@@ -181,17 +174,6 @@ public class AddBanckCardActivity extends AppCompatActivity {
         return httpClient;
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        if (keyCode==event.KEYCODE_BACK){
-            Intent intent=new Intent();
-            intent.putExtra("add_banck_go",isPerfect);
-            setResult(BaseServer.ADDBANCK_TO_BANCK,intent);
-            finish();
-        }
-
-        return true;
-    }
 
 }

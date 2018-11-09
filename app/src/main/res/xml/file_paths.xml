@@ -3,34 +3,35 @@
 
 
     <!--<files-path-->
-        <!--name="name"-->
-        <!--path="path" />-->
+    <!--name="name"-->
+    <!--path="path" />-->
     <!--//相当 Context.getFilesDir() + path, name是分享url的一部分-->
 
     <!--<cache-path-->
-        <!--name="name"-->
-        <!--path="path" />-->
+    <!--name="name"-->
+    <!--path="path" />-->
     <!--//getCacheDir()-->
 
     <!--<external-path-->
-        <!--name="name"-->
-        <!--path="path" />-->
+    <!--name="name"-->
+    <!--path="path" />-->
     <!--//Environment.getExternalStorageDirectory()-->
 
     <!--<external-files-path-->
-        <!--name="name"-->
-        <!--path="path" />//getExternalFilesDir(String) Context.getExternalFilesDir(null)-->
+    <!--name="name"-->
+    <!--path="path" />//getExternalFilesDir(String) Context.getExternalFilesDir(null)-->
 
     <!--<external-cache-path-->
-        <!--name="name"-->
-        <!--path="path" />-->
+    <!--name="name"-->
+    <!--path="path" />-->
     //Context.getExternalCacheDir()
 
 
     <!--<external-path-->
-        <!--name="external_storage_root"-->
-        <!--path="." />-->
+    <!--name="external_storage_root"-->
+    <!--path="." />-->
 
+    <!--下载-->
     <paths>
         <external-path
             name="download"
@@ -38,13 +39,13 @@
     </paths>
 
     <!--<paths>-->
-        <!--<external-cache-path-->
-            <!--name="apk"-->
-            <!--path="app/" />-->
+    <!--<external-cache-path-->
+    <!--name="apk"-->
+    <!--path="app/" />-->
     <!--</paths>-->
 
     <!--<root-path-->
-        <!--name="root-path"-->
-        <!--path="/storage/emulated/0/" />-->
+    <!--name="root-path"-->
+    <!--path="/storage/emulated/0/" />-->
 
 </resources>

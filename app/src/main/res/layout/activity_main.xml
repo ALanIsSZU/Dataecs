@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/line"
-        android:orientation="vertical" />
+        android:orientation="vertical"/>
 
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_above="@+id/tab_all"
-        android:background="#B2B2B2" />
+        android:background="#E4E4E4" />
 
     <LinearLayout
         android:id="@+id/tab_all"
@@ -26,15 +26,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:padding="3dp">
+        android:padding="7dp">
 
         <RelativeLayout
             android:id="@+id/tab_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/tab_img_1"
@@ -52,7 +52,7 @@
                 android:gravity="center"
                 android:text="首页"
                 android:textColor="@color/tab_touch"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
         </RelativeLayout>
 
@@ -68,7 +68,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
                 android:src="@drawable/classfation_no" />
 
             <TextView
@@ -80,7 +79,7 @@
                 android:gravity="center"
                 android:text="分类"
                 android:textColor="@color/tab_no"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
         </RelativeLayout>
 
@@ -92,8 +91,8 @@
 
             <ImageView
                 android:id="@+id/tab_img_4"
-                android:layout_width="20dp"
-                android:layout_height="22dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/shenqing_tap" />
 
@@ -102,10 +101,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tab_img_4"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="贷款"
                 android:textColor="@color/tab_touch"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
         </RelativeLayout>
 
@@ -131,7 +131,7 @@
                 android:gravity="center"
                 android:text="我的"
                 android:textColor="@color/tab_no"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
         </RelativeLayout>
 

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -56,8 +55,6 @@ public class BanckCordActivity extends AppCompatActivity {
     BankListAdapter adapter;
     List<BankInfoModel.ListBean> list;
 
-    boolean isPerfect =false;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,14 +66,9 @@ public class BanckCordActivity extends AppCompatActivity {
 
     private void intView() {
 
-        Intent intent=getIntent();
-        isPerfect=intent.getBooleanExtra("bank",false);
-
         back.setVisibility(View.VISIBLE);
-        title.setText("银行卡");
-        bootView = LayoutInflater.from(this).inflate(R.layout.jin_ji_list_foot, null);
-        TextView txt= bootView.findViewById(R.id.txt);
-        txt.setText("添加银行卡");
+        title.setText("银行卡管理");
+        bootView = LayoutInflater.from(this).inflate(R.layout.banck_foot, null);
 
         list=new ArrayList<>();
         adapter=new BankListAdapter(this,list);
@@ -103,11 +95,6 @@ public class BanckCordActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (isPerfect){
-            footLay.setVisibility(View.GONE);
-        }else {
-            footLay.setVisibility(View.VISIBLE);
-        }
         getCordInfo(loginPhone);
     }
 
@@ -129,7 +116,7 @@ public class BanckCordActivity extends AppCompatActivity {
             public void onResponse(Call<BankInfoModel> call, Response<BankInfoModel> response) {
 
                 BankInfoModel model=response.body();
-
+                list.clear();
                 list.addAll(model.getList());
                 adapter.notifyDataSetChanged();
 
@@ -148,26 +135,5 @@ public class BanckCordActivity extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        if (keyCode==event.KEYCODE_BACK){
-            Intent intent=new Intent();
-            intent.putExtra("banck_go",isPerfect);
-            setResult(BaseServer.BANK_MAIN,intent);
-            finish();
-        }
-
-        return true;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode==BaseServer.ADDBANCK_TO_BANCK){
-            isPerfect=data.getBooleanExtra("add_banck_go",false);
-        }
-
-    }
 }

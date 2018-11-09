@@ -50,6 +50,24 @@ public class LoginNewModle {
         private String msg;
         private String res;
         private String usrname;
+        private boolean isPerfectIdentity;
+        private boolean isPerfectMaterial;
+
+        public boolean isPerfectIdentity() {
+            return isPerfectIdentity;
+        }
+
+        public void setPerfectIdentity(boolean perfectIdentity) {
+            isPerfectIdentity = perfectIdentity;
+        }
+
+        public boolean isPerfectMaterial() {
+            return isPerfectMaterial;
+        }
+
+        public void setPerfectMaterial(boolean perfectMaterial) {
+            isPerfectMaterial = perfectMaterial;
+        }
 
         private int status;
 

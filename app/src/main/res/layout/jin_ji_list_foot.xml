@@ -23,4 +23,5 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:text="添加紧急联系人"/>
+
 </LinearLayout>

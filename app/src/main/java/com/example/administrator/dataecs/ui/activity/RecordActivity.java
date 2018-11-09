@@ -51,13 +51,15 @@ public class RecordActivity extends AppCompatActivity {
     //无记录文本
     @BindView(R.id.no_record)
     TextView noRecord;
+    @BindView(R.id.no_record_iocn)
+    ImageView noRecordIocn;
 
     RecordAdapter recordAdapter;
     //数据集合
     List<RecordMdel.PageBean.ListBean> list;
     String phone;
     //刷新状态
-    boolean isRefresh= false;
+    boolean isRefresh = false;
     //请求的页码
     private int currentPage = 1;
     //一次请求的条数
@@ -74,7 +76,7 @@ public class RecordActivity extends AppCompatActivity {
 
     private void intView() {
         back.setVisibility(View.VISIBLE);
-        title.setText("申请记录");
+        title.setText("借款记录");
         list = new ArrayList<>();
         recordAdapter = new RecordAdapter(this, list);
         recordList.setAdapter(recordAdapter);
@@ -90,9 +92,9 @@ public class RecordActivity extends AppCompatActivity {
         smartRefres.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                currentPage=1;
+                currentPage = 1;
                 isRefresh = true;
-                getRecordData(phone,currentPage,pageSize);
+                getRecordData(phone, currentPage, pageSize);
             }
         });
 
@@ -101,14 +103,14 @@ public class RecordActivity extends AppCompatActivity {
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 currentPage++;
                 isRefresh = false;
-                getRecordData(phone,currentPage,pageSize);
+                getRecordData(phone, currentPage, pageSize);
             }
         });
 
     }
 
     //请求记录数据
-    public void getRecordData(String phone,int currentPage,int pageSize) {
+    public void getRecordData(String phone, int currentPage, int pageSize) {
 
         if (!SystemUntils.isNetworkConnected(this)) {
             Toast.makeText(this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
@@ -119,12 +121,12 @@ public class RecordActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         final AllInte inte = retrofit.create(AllInte.class);
-        Call<RecordMdel> call=inte.getRecordInfo(phone,currentPage,pageSize);
+        Call<RecordMdel> call = inte.getRecordInfo(phone, currentPage, pageSize);
         call.enqueue(new Callback<RecordMdel>() {
             @Override
             public void onResponse(Call<RecordMdel> call, Response<RecordMdel> response) {
 
-                RecordMdel modle=response.body();
+                RecordMdel modle = response.body();
 
                 if (isRefresh) {
                     list.clear();
@@ -133,12 +135,14 @@ public class RecordActivity extends AppCompatActivity {
                 list.addAll(modle.getPage().getList());
                 recordAdapter.notifyDataSetChanged();
 
-                if (list.size()>0){
+                if (list.size() > 0) {
                     recordList.setVisibility(View.VISIBLE);
                     noRecord.setVisibility(View.GONE);
-                }else {
+                    noRecordIocn.setVisibility(View.GONE);
+                } else {
                     recordList.setVisibility(View.GONE);
                     noRecord.setVisibility(View.VISIBLE);
+                    noRecordIocn.setVisibility(View.VISIBLE);
                 }
 
                 if (modle.getPage().getList().size() < 10) {

@@ -20,7 +20,19 @@
     <color name="black">#000000</color>
     <!--提示字体颜色-->
     <color name="tip_color">#CCCCD2</color>
-    <color name="tab_no">#999999</color>
-    <color name="tab_touch">#F4901E</color>
+    <color name="tab_no">#666666</color>
+    <color name="tab_touch">#45A8FD</color>
     <color name="red">#eb2127</color>
+
+    <!--标题颜色-->
+    <color name="new_title">#64B8FF</color>
+    <!--按钮颜色-->
+    <color name="btn_new">#45A8FD</color>
+    <!--下划线颜色-->
+    <color name="underline_n">#E4E4E4</color>
+    <color name="txt_n">#666666</color>
+    <color name="tip_n">#999999</color>
+    <color name="txt_n_two">#333333</color>
+
+    <color name="partition_background">#EDEDED</color>
 </resources>

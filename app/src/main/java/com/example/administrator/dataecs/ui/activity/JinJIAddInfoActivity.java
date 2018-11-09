@@ -94,10 +94,10 @@ public class JinJIAddInfoActivity extends AppCompatActivity {
 
                 //封装成一个json传给后台
                 JinJiAddModle modle = new JinJiAddModle();
-                modle.setUserMobile(loginPhone);
-                modle.setEmergentName(name.getText().toString());
-                modle.setEmergentPhone(phone.getText().toString());
-                modle.setRelationship(qinShu.getText().toString());
+//                modle.setUserMobile(loginPhone);
+//                modle.setEmergentName(name.getText().toString());
+//                modle.setEmergentPhone(phone.getText().toString());
+//                modle.setRelationship(qinShu.getText().toString());
 
                 String json = new Gson().toJson(modle);
                 commitInfo(json);

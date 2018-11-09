@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#EDEDED">
 
     <include
         android:id="@+id/title_layout"
@@ -23,7 +24,9 @@
             android:id="@+id/record_list"
             android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:divider="@null"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"/>
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:layout_width="match_parent"
@@ -32,14 +35,27 @@
 
 
 
+
+    <ImageView
+        android:id="@+id/no_record_iocn"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="188dp"
+        android:src="@drawable/warm"/>
+
     <TextView
         android:id="@+id/no_record"
         android:visibility="gone"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/no_record_iocn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#999"
+        android:textColor="@color/tip_n"
         android:textSize="18sp"
-        android:text="一 暂无记录 一"/>
+        android:text="暂无消息记录！"/>
+
 
 </RelativeLayout>

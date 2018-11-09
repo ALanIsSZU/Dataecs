@@ -23,6 +23,7 @@ import com.example.administrator.dataecs.model.LoginNewModle;
 import com.example.administrator.dataecs.model.PhoneListModel;
 import com.example.administrator.dataecs.model.VerificationCodeModel;
 import com.example.administrator.dataecs.util.BaseServer;
+import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.SharePreferencesUtil;
 import com.example.administrator.dataecs.util.StringUtil;
 import com.example.administrator.dataecs.util.SystemUntils;
@@ -246,6 +247,16 @@ public class LoginActivity extends AppCompatActivity {
                     String userName = modle.getResult().getUsrname();
                     SharePreferencesUtil.saveUserInfo(LoginActivity.this, userName);
                     SharePreferencesUtil.saveShenQing(LoginActivity.this, modle.getResult().getStatus());
+                    //账户和身份认证
+                    SPUtils.put(LoginActivity.this,BaseServer.ID_INFORMATION,modle.getResult().isPerfectIdentity());
+                    SPUtils.put(LoginActivity.this,BaseServer.BANCK_INFORMATION,modle.getResult().isPerfectMaterial());
+                    //用户是否全部认证
+                    if (modle.getResult().isPerfectIdentity() && modle.getResult().isPerfectMaterial()){
+                        SPUtils.put(LoginActivity.this,BaseServer.ALL_ATTESTATION,true);
+                    }else {
+                        SPUtils.put(LoginActivity.this,BaseServer.ALL_ATTESTATION,false);
+                    }
+
                     if (modle.getResult().getStatus() == 3) {
 
                         if (modle.getResult().getRepayTime() == null || "".equals(modle.getResult().getRepayTime())) {

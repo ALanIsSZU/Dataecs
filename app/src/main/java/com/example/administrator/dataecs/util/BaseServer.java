@@ -7,28 +7,37 @@ package com.example.administrator.dataecs.util;
 public class BaseServer {
 
     //权限返回的Code
-    public static final int REQUEST_SATRT = 10001;
-    public static final int START_FAIL = 10002;
-    public static final int REQUEST_Mail = 10003;
-    public static final int MAIL_FAIL = 10004;
+    public static final int REQUEST_SATRT = 1001;
+    public static final int START_FAIL = 1002;
+    public static final int REQUEST_Mail = 1003;
+    public static final int MAIL_FAIL = 1004;
+    public static final int ID_CARD_FRONT=1015;
+    public static final int ID_CARD_BACK=1017;
+    public static final int ID_CARD_FAIL=1016;
 
     //Activity返回的code
-    public static final int PERSON_CODE=10005;
-    public static final int JIN_JI_CODE=10006;
-    public static final int BANK_CODE=10007;
-    public static final int WORK_CODE=10008;
+    public static final int PERSON_CODE = 1005;
+    public static final int JIN_JI_CODE = 1006;
+    public static final int BANK_CODE = 1007;
+    public static final int WORK_CODE = 1008;
 
-    public static final int PERSON_TO_MAIN=10009;
-    public static final int JIN_JI_MAIN=10010;
-    public static final int BANK_MAIN=10011;
-    public static final int WORK_TO_MAIN=10012;
-    public static final int BANCK_TO_ADDBANCK=10013;
-    public static final int ADDBANCK_TO_BANCK=10014;
+    public static final int PERSON_TO_MAIN = 1009;
+    public static final int JIN_JI_MAIN = 1010;
+    public static final int BANK_MAIN = 1011;
+    public static final int WORK_TO_MAIN = 1012;
+    public static final int BANCK_TO_ADDBANCK = 1013;
+    public static final int ADDBANCK_TO_BANCK = 1014;
+    public static final int REQUEST_CODE_CAMERA = 1020;
+
+    //SharePreferences的存储的关键字
+    public static final String ID_INFORMATION = "ID_INFORMATION";
+    public static final String BANCK_INFORMATION = "BANCK_INFORMATION";
+    public static final String ALL_ATTESTATION = "ALL_ATTESTATION";
 
     //正服
-    public static final String BASE_URL = "http://120.79.85.227:8085/renren-fast/";
+    public static final String BASE_URL = "http://120.79.85.227:80/renren-fast/";
     //测服
-//    public static final String BASE_URL = "http://192.168.0.168:8085/renren-fast/";
+//    public static final String BASE_URL = "http://192.168.0.169:8085/renren-fast/";
 
     //爬虫正服
 //    public static final String  PYTHON_BASE_URL = "";
@@ -84,7 +93,8 @@ public class BaseServer {
     /**
      * 获取用户记录
      */
-    public static final String RECORD = BASE_URL + "app/getByPhone";
+//    public static final String RECORD = BASE_URL + "app/getByPhone";
+    public static final String RECORD = BASE_URL + "api/getLoanRecord";
     /**
      * 提交资料申请
      */
@@ -94,7 +104,7 @@ public class BaseServer {
      */
     public static final String CHECK_TYPE = BASE_URL + "app/auditStatus";
     /**
-     * 立即申请
+     * 立即申请(第二次贷款)
      */
     public static final String SECOND_COMMIT = BASE_URL + "app/applyImmediately";
     /**
@@ -147,4 +157,14 @@ public class BaseServer {
      * 获取跳转支付宝授权的auth_info
      */
     public static final String GO_ZHI_FU_AUTH_INFO = BASE_URL + "AppAlipay/getOrderInfo";
+
+    /**
+     * 提交基本信息和资质要求
+     */
+    public static final String BASE_ZHI_INFO = BASE_URL + "app/updatePersonInfo";
+
+    /**
+     * 获取身份认证的信息
+     */
+    public static final String REN_ZHEN_INFO = BASE_URL + "app/showPersonInfo";
 }

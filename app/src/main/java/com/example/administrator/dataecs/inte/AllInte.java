@@ -11,6 +11,7 @@ import com.example.administrator.dataecs.model.LoginNewModle;
 import com.example.administrator.dataecs.model.MainListHearModel;
 import com.example.administrator.dataecs.model.PerosonInfoModel;
 import com.example.administrator.dataecs.model.RecordMdel;
+import com.example.administrator.dataecs.model.RenZhenInfoModel;
 import com.example.administrator.dataecs.model.SecondCommitModle;
 import com.example.administrator.dataecs.model.ShenQinCommitModel;
 import com.example.administrator.dataecs.model.TabContentModel;
@@ -157,21 +158,34 @@ public interface AllInte {
     Call<WorkInfoModel> getWorkInfo(@Query("phone") String phone);
 
     /**
-     *获取支付宝的privatekey等信息
+     * 获取支付宝的privatekey等信息
      */
     @POST(BaseServer.GET_ZHI_FU_BAO_INFO)
     Call<ZhiFuModel> getZhiFuInfo();
 
     /**
-     *获取跳转支付宝授权的URL
+     * 获取跳转支付宝授权的URL
      */
     @POST(BaseServer.GO_ZHI_FU_URL)
     Call<ZhiFuUrlModel> getZhiFuUrl();
 
     /**
-     *获取跳转支付宝授权的URL
+     * 获取跳转支付宝授权的URL
      */
     @POST(BaseServer.GO_ZHI_FU_AUTH_INFO)
     Call<ZhiFuAutoInfoModel> getZhiFuAutoInfo();
+
+    /**
+     * 提交基本信息个资质要求
+     */
+    @POST(BaseServer.BASE_ZHI_INFO)
+    Call<JinJiRequestModle> commitBaseInfo();
+
+    /**
+     * 获取身份认证的所以信息
+     */
+    @POST(BaseServer.REN_ZHEN_INFO)
+    Call<RenZhenInfoModel> getAllinfo(@Query("phone") String phone);
+
 
 }

@@ -2,65 +2,118 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#EDEDED">
 
     <include layout="@layout/title_layout" />
 
-    <LinearLayout
-        android:id="@+id/aboutUs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="关于我们"
-            android:textColor="#000"
-            android:textSize="17sp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="7dp"
-        android:background="#f0f0f0" />
-
-    <LinearLayout
-        android:id="@+id/commonProblem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="常见问题"
-            android:textColor="#000"
-            android:textSize="17sp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="7dp"
-        android:background="#f0f0f0" />
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logo_suoer_new"/>
 
     <TextView
-        android:id="@+id/exit_login"
-        android:visibility="gone"
-        android:layout_width="match_parent"
+        android:id="@+id/code_txt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:background="@drawable/exit_login_background"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:text="退出登录"/>
+        android:layout_marginTop="11dp"
+        android:textSize="15sp"
+        android:textColor="@color/txt_n"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="#FFF">
+
+        <RelativeLayout
+            android:id="@+id/code_lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="版本说明"
+                android:textColor="@color/txt_n"
+                android:textSize="14sp"  />
+
+            <TextView
+                android:id="@+id/ban_ben_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/txt_n"
+                android:textSize="12sp"
+                android:layout_marginRight="11dp"
+                android:layout_toLeftOf="@+id/img"/>
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/right_arrows"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_below="@+id/code_lin"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/underline_n"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+
+        <RelativeLayout
+            android:id="@+id/aboutUs"
+            android:layout_below="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关于我们"
+                android:textColor="@color/txt_n"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/right_arrows"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_below="@+id/aboutUs"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_height="1dp"
+            android:background="@color/underline_n" />
+
+        <TextView
+            android:id="@+id/exit_login"
+            android:visibility="visible"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="82dp"
+            android:background="@drawable/btn_background"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#fff"
+            android:text="退出登录"/>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>
