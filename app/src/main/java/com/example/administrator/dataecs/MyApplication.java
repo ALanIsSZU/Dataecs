@@ -3,12 +3,15 @@ package com.example.administrator.dataecs;
 import android.app.Application;
 import android.os.Build;
 import android.os.StrictMode;
+import android.widget.Toast;
 
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.AccessToken;
+import com.example.administrator.dataecs.util.SystemUntils;
 import com.example.administrator.dataecs.util.ToastUntils;
+import com.xinyan.bigdata.XinYanSDK;
 
 /**
  * Created by Administrator on 2018/7/18.
@@ -23,12 +26,19 @@ public class MyApplication extends Application{
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
         }
+
         initAccessTokenLicenseFile();
+        initXYSDK();
     }
 
     //初始化百度的身份证识别API
-
     public void initAccessTokenLicenseFile(){
+
+        if (!SystemUntils.isNetworkConnected(this)) {
+            Toast.makeText(this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         OCR.getInstance(this).initAccessToken(new OnResultListener<AccessToken>() {
             @Override
             public void onResult(AccessToken result) {
@@ -41,6 +51,17 @@ public class MyApplication extends Application{
                 ToastUntils.ToastShort(MyApplication.this,"百度Api获取token失败,"+error.toString());
             }
         }, getApplicationContext());
+    }
+
+    //初始化新颜的sdk
+    public void initXYSDK(){
+
+        if (!SystemUntils.isNetworkConnected(this)) {
+            Toast.makeText(this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        XinYanSDK.getInstance().init(this);
     }
 
 }

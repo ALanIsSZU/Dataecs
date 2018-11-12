@@ -1,15 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        release {
-            keyAlias 'com.xcl.xqz'
-            keyPassword 'xqz159!@#'
-            //自己项目路径的签名文件路径（路径全名）
-            storeFile file('D:/Android/Android_Project/Dataecs/app/QZX.jks')
-            storePassword 'xqz159!@#'
-        }
-    }
+
     compileSdkVersion 26
     buildToolsVersion "28.0.0"
     defaultConfig {
@@ -20,6 +12,33 @@ android {
         versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    //新颜的导包
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'com.xcl.xqz'
+            keyPassword 'xqz159!@#'
+            //自己项目路径的签名文件路径（路径全名）
+            storeFile file('D:/Android/Android_Project/Dataecs/app/QZX.jks')
+            storePassword 'xqz159!@#'
+        }
+        debug {
+            keyAlias 'com.xcl.xqz'
+            keyPassword 'xqz159!@#'
+            //自己项目路径的签名文件路径（路径全名）
+            storeFile file('D:/Android/Android_Project/Dataecs/app/QZX.jks')
+            storePassword 'xqz159!@#'
+        }
+    }
+
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -57,4 +76,8 @@ dependencies {
     //百度api（身份证识别）
     implementation files('libs/ocr-sdk.jar')
     implementation project(path: ':ocr_ui')
+    //新颜的导包
+    implementation(name: 'xybigdatasdk-release-out1.8.0', ext: 'aar')
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
 }

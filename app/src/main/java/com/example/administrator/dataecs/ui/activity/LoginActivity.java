@@ -223,6 +223,7 @@ public class LoginActivity extends AppCompatActivity {
     public void Login(String json) {
         if (!SystemUntils.isNetworkConnected(this)) {
             Toast.makeText(LoginActivity.this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
@@ -317,6 +318,7 @@ public class LoginActivity extends AppCompatActivity {
     public void getVerificationCode() {
         if (!SystemUntils.isNetworkConnected(this)) {
             Toast.makeText(LoginActivity.this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         Retrofit retrofit = new Retrofit.Builder()

@@ -176,6 +176,7 @@ public class TabShenQingFragement extends Fragment {
     public void SecondCommit(String phone) {
         if (!SystemUntils.isNetworkConnected(getActivity())) {
             Toast.makeText(getActivity(), "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -385,6 +386,7 @@ public class TabShenQingFragement extends Fragment {
 
         if (!SystemUntils.isNetworkConnected(getActivity())) {
             Toast.makeText(getActivity(), "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         Retrofit retrofit = new Retrofit.Builder()

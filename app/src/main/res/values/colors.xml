@@ -35,4 +35,6 @@
     <color name="txt_n_two">#333333</color>
 
     <color name="partition_background">#EDEDED</color>
+    <color name="share_color">#00ffffff</color>
+
 </resources>

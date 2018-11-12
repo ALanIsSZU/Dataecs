@@ -306,6 +306,7 @@ public class TabMainFragement extends Fragment implements View.OnClickListener {
 
         if (!SystemUntils.isNetworkConnected(getActivity())) {
             Toast.makeText(getContext(), "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         OkHttpClient client = new OkHttpClient.Builder().

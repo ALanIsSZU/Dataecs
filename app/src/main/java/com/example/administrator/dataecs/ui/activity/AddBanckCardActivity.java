@@ -114,6 +114,7 @@ public class AddBanckCardActivity extends AppCompatActivity {
 
         if (!SystemUntils.isNetworkConnected(this)) {
             Toast.makeText(this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
