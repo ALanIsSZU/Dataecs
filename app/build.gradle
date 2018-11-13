@@ -37,8 +37,6 @@ android {
         }
     }
 
-
-
     buildTypes {
         release {
             minifyEnabled false
@@ -73,11 +71,13 @@ dependencies {
     implementation files('libs/nineoldandroids-2.4.0.jar')
     //支付宝
     implementation files('libs/alipaySdk-20180601.jar')
-    //百度api（身份证识别）
-    implementation files('libs/ocr-sdk.jar')
-    implementation project(path: ':ocr_ui')
     //新颜的导包
     implementation(name: 'xybigdatasdk-release-out1.8.0', ext: 'aar')
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
+    //百度api（身份证识别）
+    implementation files('libs/ocr-sdk.jar')
+    implementation project(path: ':ocr_ui')
+    //百度人脸识别的api
+    implementation project(path: ':faceplatform-ui')
 }

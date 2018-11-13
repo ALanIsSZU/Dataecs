@@ -1,1 +1,4 @@
-include ':app','ocr_ui'
+include ':app'
+include 'ocr_ui'
+include ':faceplatform-ui'
+include ':faceplatform'
