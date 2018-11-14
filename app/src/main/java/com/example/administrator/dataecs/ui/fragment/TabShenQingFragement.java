@@ -152,17 +152,17 @@ public class TabShenQingFragement extends Fragment {
                 getSHType(LoginPhone);
                 break;
 
-                //第二次提交贷款
+            //第二次提交贷款
             case R.id.dai_kuan_commit:
                 if (isSecoend) {
                     String number = SharePreferencesUtil.getUserName(getActivity());
                     SecondCommit(number);
                 } else {
 
-                    if ((Boolean) SPUtils.get(getActivity(),BaseServer.BANCK_INFORMATION,false)&&
-                            (boolean) SPUtils.get(getActivity(), BaseServer.ID_INFORMATION, false)){
+                    if ((Boolean) SPUtils.get(getActivity(), BaseServer.BANCK_INFORMATION, false) &&
+                            (boolean) SPUtils.get(getActivity(), BaseServer.ID_INFORMATION, false)) {
                         ToastUntils.ToastShort(getActivity(), "信息待审核！");
-                    }else {
+                    } else {
                         ToastUntils.ToastShort(getActivity(), "请完善身份认证和我的账户!");
                     }
 
@@ -194,8 +194,10 @@ public class TabShenQingFragement extends Fragment {
                 loginLayout.setVisibility(View.GONE);
                 otherLay.setVisibility(View.GONE);
                 attestationLay.setVisibility(View.VISIBLE);
+
                 shenQingIcon.setImageResource(R.drawable.shen_qing_yes);
                 shenQingCommitTxt.setText("借款已申请");
+                shenQingCommitLogo.setVisibility(View.VISIBLE);
                 shenQingCommitLogo.setImageResource(R.drawable.yes);
 
                 shenHeIcon.setImageResource(R.drawable.jie_kuan_no);
@@ -247,7 +249,7 @@ public class TabShenQingFragement extends Fragment {
                 attestationLay.setVisibility(View.VISIBLE);
                 shenQingIcon.setImageResource(R.drawable.shen_qing_yes);
                 shenQingCommitTxt.setText("借款已申请");
-                shenQingCommitLogo.setVisibility(View.INVISIBLE);
+                shenQingCommitLogo.setVisibility(View.VISIBLE);
                 shenQingCommitLogo.setImageResource(R.drawable.yes);
 
                 shenHeIcon.setImageResource(R.drawable.jie_kuan_no);
@@ -320,8 +322,8 @@ public class TabShenQingFragement extends Fragment {
                     fangKuanCommitTxt.setText("已放款");
                     fangKuanCommitLogo.setVisibility(View.VISIBLE);
                     fangKuanCommitLogo.setImageResource(R.drawable.yes);
-                    fangKuanCommitContent.setText("还款日期：" + SharePreferencesUtil.getTime(getActivity())+"\n"
-                            +"还款金额：" + SharePreferencesUtil.getMoney(getActivity()));
+                    fangKuanCommitContent.setText("还款日期：" + SharePreferencesUtil.getTime(getActivity()) + "\n"
+                            + "还款金额：" + SharePreferencesUtil.getMoney(getActivity()));
 
                 }
 
@@ -399,7 +401,7 @@ public class TabShenQingFragement extends Fragment {
             @Override
             public void onResponse(Call<CheckInfoModel> call, Response<CheckInfoModel> response) {
                 CheckInfoModel model = response.body();
-                Log.d("123","后台传过来的状态"+model.getMap().getStatus());
+                Log.d("123", "后台传过来的状态" + model.getMap().getStatus());
                 SharePreferencesUtil.saveShenQing(getActivity(), model.getMap().getStatus());
 
                 //这个操作不让数据每次刷新都进行修改UI操作
