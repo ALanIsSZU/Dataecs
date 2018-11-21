@@ -1,10 +1,10 @@
 package com.example.administrator.dataecs.ui.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -27,9 +27,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import butterknife.ButterKnife;
-
-public class TaoBaoActivity extends AppCompatActivity {
+public class TaoBaoActivity extends Activity {
 
     private TextView tvResult;
     private StringBuffer stringBuffer;
@@ -50,7 +48,6 @@ public class TaoBaoActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tao_bao_layout);
-        ButterKnife.bind(this);
 
         tvResult = findViewById(R.id.tvResult);
         progressBar = findViewById(R.id.pb);
@@ -85,7 +82,6 @@ public class TaoBaoActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     class FormatJson extends CommonAsyncTask<String, String, String> {
@@ -126,12 +122,29 @@ public class TaoBaoActivity extends AppCompatActivity {
             stringBuffer.append("订单ID:" + ConfigUtil.tradeNo + "\n");
             stringBuffer.append("任务ID:" + xinyanCallBackData.getToken() + "\n");
             stringBuffer.append("任务消息:" + xinyanCallBackData.getMessage() + "\n");
+            Log.d("123", "taskType:" + xinyanCallBackData.getTaskType() + "==========" + "code" + xinyanCallBackData.getCode());
             tvResult.setText(stringBuffer.toString());
 
             if ("YES".equals(ConfigUtil.titleConfig.getLoginSuccessQuit())) {//登录退出模式，结果需要自己轮询解析的状态，然后再获取结果
                 tvResult.append("\n授权成功退出模式下要自行查询任务状态");
+
+                finish();
             } else {
+                if(xinyanCallBackData.getCode()==1){
+
+//                    if (xinyanCallBackData.getTaskType() != null && !"".equals(xinyanCallBackData.getTaskType())
+//                            && "taobaopay".equals(xinyanCallBackData.getTaskType())) {
+//                        SPUtils.put(TaoBaoActivity.this, Config.TAO_BAO_PERFECT, true);
+//                    } else if (xinyanCallBackData.getTaskType() != null && !"".equals(xinyanCallBackData.getTaskType())
+//                            && "carrier".equals(xinyanCallBackData.getTaskType())) {
+//                        SPUtils.put(TaoBaoActivity.this, Config.PHONE_STORE_PERFECT, true);
+//                    }
+                    finish();
+                }else if (xinyanCallBackData.getCode()==0){
+                    finish();
+                }
                 handler.sendEmptyMessageDelayed(1, 500);
+
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -51,8 +51,8 @@ public class PhoneStoreActivity extends AppCompatActivity {
     Button next;
 
     //新颜的apiUser和apiKey
-    private String apiUser = "123";
-    private String apiKey = "1231";
+    private String apiUser = "8150716192";
+    private String apiKey = "f275fde017e44bb29f79f186dcfe3422";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -105,7 +105,7 @@ public class PhoneStoreActivity extends AppCompatActivity {
                 ConfigUtil.carrierIDandNameShow = Constants.YES;
 
                 XinYanSDK.getInstance().setMerchantAttribute(apiUser, apiKey);
-                StartXYSDKUtil.startSDK(PhoneStoreActivity.this, Constants.Function.FUNCTION_CARRIER, Config.orderEn);
+                StartXYSDKUtil.startSDK(PhoneStoreActivity.this, Constants.Function.FUNCTION_CARRIER, Config.orderEn, false);
                 finish();
                 break;
 

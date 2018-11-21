@@ -28,6 +28,7 @@ import com.example.administrator.dataecs.util.Constants;
 import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.StartXYSDKUtil;
 import com.example.administrator.dataecs.util.SystemUntils;
+import com.example.administrator.dataecs.util.ToastUntils;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
 import com.yanzhenjie.permission.Rationale;
@@ -111,7 +112,6 @@ public class DataPerfectActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         isMyelfInfoPerfect = (boolean) SPUtils.get(this, Config.ID_INFOMATION_PERFECT, false);
         isPhonePerfect = (boolean) SPUtils.get(this, Config.PHONE_STORE_PERFECT, false);
         isTaoBaoPerfect = (boolean) SPUtils.get(this, Config.TAO_BAO_PERFECT, false);
@@ -202,14 +202,18 @@ public class DataPerfectActivity extends AppCompatActivity {
             public void onResponse(Call<TaoBaoRequestModel> call, Response<TaoBaoRequestModel> response) {
                 loadingLay.setVisibility(View.GONE);
                 TaoBaoRequestModel model=response.body();
+                if (model.getCode()==0){
 
-                StartXYSDKUtil.startSDK(DataPerfectActivity.this, model.getMap().getMember_id(), model.getMap().getTerminal_id(),
-                        Constants.Function.FUNCTION_TAOBAOPAY, model.getMap().getPrepay_id(), Config.orderEn);
+                    StartXYSDKUtil.startSDK(DataPerfectActivity.this, model.getMap().getMember_id(), model.getMap().getTerminal_id(),
+                            Constants.Function.FUNCTION_TAOBAOPAY, model.getMap().getPrepay_id(), Config.orderEn,true);
+                }else {
+                    ToastUntils.ToastShort(DataPerfectActivity.this,"后台请求失败！");
+                }
             }
 
             @Override
             public void onFailure(Call<TaoBaoRequestModel> call, Throwable t) {
-
+                ToastUntils.ToastShort(DataPerfectActivity.this,"请求失败！"+t.toString());
             }
         });
     }

@@ -122,7 +122,7 @@
         <activity
             android:name="com.example.administrator.dataecs.ui.activity.TaoBaoActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/myTransparent"></activity>
         <activity
             android:name="com.example.administrator.dataecs.ui.activity.JinJIAddInfoActivity"
             android:screenOrientation="portrait"

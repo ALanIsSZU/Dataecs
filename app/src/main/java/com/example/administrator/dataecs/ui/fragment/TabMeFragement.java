@@ -21,7 +21,6 @@ import com.example.administrator.dataecs.ui.activity.SettingActivity;
 import com.example.administrator.dataecs.util.BaseServer;
 import com.example.administrator.dataecs.util.Config;
 import com.example.administrator.dataecs.util.SPUtils;
-import com.example.administrator.dataecs.util.SharePreferencesUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -170,12 +169,12 @@ public class TabMeFragement extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if (SharePreferencesUtil.getUserName(getActivity()).equals("")) {
+        if ("".equals(SPUtils.get(getActivity(),Config.TOKEN_VALUE,""))) {
             useName.setText("请登陆");
             attestationType.setVisibility(View.GONE);
         } else {
 
-            useName.setText(SharePreferencesUtil.getUserName(getActivity()));
+            useName.setText((String)SPUtils.get(getActivity(),Config.PHONE_VALUE,""));
             attestationType.setVisibility(View.VISIBLE);
 
             if ((Boolean) SPUtils.get(getActivity(), BaseServer.BANCK_INFORMATION, false) &&
