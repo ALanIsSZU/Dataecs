@@ -9,6 +9,11 @@
     <string name="btn_dialog_yes_permission">去设置</string>
     <string name="btn_dialog_no_permission">取消</string>
 
+    <string name="inputname">请输入姓名</string>
+    <string name="inputid">请输入身份证号</string>
+    <string name="inputPhonum">请输入手机号</string>
+    <string name="inputall">请输入全部信息</string>
+
     <!--首页跑马灯的轮播信息-->
     <string name="content1"><![CDATA[<font color="#e9575c">%1$s</font><font color="#000000">%2$s</font>]]></string>
 </resources>

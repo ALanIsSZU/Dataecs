@@ -20,9 +20,9 @@
 
             <ImageView
                 android:id="@+id/useHead"
-                android:layout_centerHorizontal="true"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
@@ -31,23 +31,23 @@
 
             <TextView
                 android:id="@+id/useName"
-                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/txt_n_two"
+                android:layout_below="@+id/useHead"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="5dp"
-                android:layout_below="@+id/useHead" />
+                android:textColor="@color/txt_n_two"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/attestation_type"
-                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/useName"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/wei_ren_zheng"
-                android:layout_below="@+id/useName"/>
+                android:src="@drawable/wei_ren_zheng" />
 
         </RelativeLayout>
 
@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_n"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <ImageView
                 android:id="@+id/right_arrows"
@@ -111,9 +111,9 @@
 
             <ImageView
                 android:id="@+id/icon_6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_for_id" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/zi_liao" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/txt_n_two"
                 android:layout_toRightOf="@+id/icon_6"
-                android:text="身份认证" />
+                android:text="资料认证" />
 
             <TextView
                 android:id="@+id/id_information_type"
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_n"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <ImageView
                 android:id="@+id/right_arrows1"

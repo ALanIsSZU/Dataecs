@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.idl.face.platform.FaceConfig;
 import com.baidu.idl.face.platform.FaceEnvironment;
@@ -19,9 +20,14 @@ import com.baidu.idl.face.platform.FaceSDKManager;
 import com.baidu.idl.face.platform.LivenessTypeEnum;
 import com.example.administrator.dataecs.MyApplication;
 import com.example.administrator.dataecs.R;
+import com.example.administrator.dataecs.inte.AllInte;
+import com.example.administrator.dataecs.model.TaoBaoRequestModel;
 import com.example.administrator.dataecs.util.BaseServer;
+import com.example.administrator.dataecs.util.Config;
 import com.example.administrator.dataecs.util.Constants;
+import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.StartXYSDKUtil;
+import com.example.administrator.dataecs.util.SystemUntils;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
 import com.yanzhenjie.permission.Rationale;
@@ -32,6 +38,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DataPerfectActivity extends AppCompatActivity {
 
@@ -61,23 +72,17 @@ public class DataPerfectActivity extends AppCompatActivity {
     TextView loadingTxt;
     @BindView(R.id.loading_lay)
     View loadingLay;
+    @BindView(R.id.id_card_type)
+    TextView idCardType;
 
 
     //资料和认证是否完善
-    boolean isMyelfInfoPerfect = false;
-    boolean isPhonePerfect = false;
-    boolean isTaoBaoPerfect = false;
-    boolean isFacePerfect = false;
-    boolean isIDCardPerfect = false;
+    boolean isMyelfInfoPerfect;
+    boolean isPhonePerfect;
+    boolean isTaoBaoPerfect;
+    boolean isFacePerfect;
+    boolean isIDCardPerfect;
 
-    //新颜商户号
-    String memberId = "234";
-    //新颜终端号
-    String terminalId = "234";
-    //新颜订单编号
-    String orderInfo = "234";
-    //新颜订环境  测试环境：test 正式环境：product 默认是生产
-    String orderEn = "test";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,6 +108,23 @@ public class DataPerfectActivity extends AppCompatActivity {
         MyApplication.livenessList.add(LivenessTypeEnum.HeadLeftOrRight);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        isMyelfInfoPerfect = (boolean) SPUtils.get(this, Config.ID_INFOMATION_PERFECT, false);
+        isPhonePerfect = (boolean) SPUtils.get(this, Config.PHONE_STORE_PERFECT, false);
+        isTaoBaoPerfect = (boolean) SPUtils.get(this, Config.TAO_BAO_PERFECT, false);
+        isFacePerfect = (boolean) SPUtils.get(this, Config.FACE_FOUSE_PERFECT, false);
+        isIDCardPerfect = (boolean) SPUtils.get(this, Config.ID_CARD_PERFECT, false);
+
+        idInformationType.setText(isMyelfInfoPerfect ? "已完善" : "未完善");
+        phoneStoreType.setText(isPhonePerfect ? "已完善" : "未完善");
+        taoBaoType.setText(isTaoBaoPerfect ? "已完善" : "未完善");
+        faceFouseType.setText(isFacePerfect ? "已完善" : "未完善");
+        idCardType.setText(isIDCardPerfect ? "已完善" : "未完善");
+    }
+
     @OnClick({R.id.back, R.id.phone_store_relate, R.id.tao_bao_relate,
             R.id.face_fouse_relate, R.id.id_information_relate, R.id.id_card_relate})
     public void onViewClicked(View view) {
@@ -119,15 +141,22 @@ public class DataPerfectActivity extends AppCompatActivity {
 
             //运营商
             case R.id.phone_store_relate:
-                Intent phone_Store = new Intent(this, PhoneStoreActivity.class);
-                startActivity(phone_Store);
+
+                if (!isPhonePerfect) {
+
+                    Intent intent=new Intent(DataPerfectActivity.this,PhoneStoreActivity.class);
+                    startActivity(intent);
+                }
+
                 break;
 
             //淘宝
             case R.id.tao_bao_relate:
                 if (!isTaoBaoPerfect) {
                     //启动新颜SDK
-                    StartXYSDKUtil.startSDK(this, memberId, terminalId, Constants.Function.FUNCTION_TAOBAO, orderInfo, orderEn);
+                    loadingLay.setVisibility(View.VISIBLE);
+                    getXYorder();
+
                 }
                 break;
 
@@ -143,10 +172,46 @@ public class DataPerfectActivity extends AppCompatActivity {
 
             //身份证识别
             case R.id.id_card_relate:
-                Intent idCard = new Intent(this, IDcardActivity.class);
-                startActivity(idCard);
+
+                if (!isIDCardPerfect) {
+
+                    Intent idCard = new Intent(this, IDcardActivity.class);
+                    startActivity(idCard);
+
+                }
                 break;
         }
+    }
+
+    //获取新颜的订单号(淘宝认证)
+    public void getXYorder() {
+        if (!SystemUntils.isNetworkConnected(this)) {
+            Toast.makeText(this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BaseServer.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        final AllInte inte = retrofit.create(AllInte.class);
+        Call<TaoBaoRequestModel> call = inte.getTaoBaoInfo();
+        call.enqueue(new Callback<TaoBaoRequestModel>() {
+            @Override
+            public void onResponse(Call<TaoBaoRequestModel> call, Response<TaoBaoRequestModel> response) {
+                loadingLay.setVisibility(View.GONE);
+                TaoBaoRequestModel model=response.body();
+
+                StartXYSDKUtil.startSDK(DataPerfectActivity.this, model.getMap().getMember_id(), model.getMap().getTerminal_id(),
+                        Constants.Function.FUNCTION_TAOBAOPAY, model.getMap().getPrepay_id(), Config.orderEn);
+            }
+
+            @Override
+            public void onFailure(Call<TaoBaoRequestModel> call, Throwable t) {
+
+            }
+        });
     }
 
     //-------------------------------------------权限检测开始---------------------------------------------------------------------//
@@ -197,7 +262,6 @@ public class DataPerfectActivity extends AppCompatActivity {
         FaceSDKManager.getInstance().setFaceConfig(config);
 
     }
-
 
     private PermissionListener listener = new PermissionListener() {
         //授权成功

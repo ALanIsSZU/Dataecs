@@ -7,13 +7,12 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.TextView;
 
 /**
  * Created by Administrator on 2018/7/5.
  */
 
-public class CountDownTextView extends TextView {
+public class CountDownTextView extends android.support.v7.widget.AppCompatTextView {
 
     /**
      * 提示文字

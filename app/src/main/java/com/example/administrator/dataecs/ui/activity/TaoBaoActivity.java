@@ -124,7 +124,7 @@ public class TaoBaoActivity extends AppCompatActivity {
             XinyanCallBackData xinyanCallBackData = (XinyanCallBackData) getIntent().getExtras().get("data");
             stringBuffer = new StringBuffer();
             stringBuffer.append("订单ID:" + ConfigUtil.tradeNo + "\n");
-            stringBuffer.append("任务ID:" + xinyanCallBackData.getTaskId() + "\n");
+            stringBuffer.append("任务ID:" + xinyanCallBackData.getToken() + "\n");
             stringBuffer.append("任务消息:" + xinyanCallBackData.getMessage() + "\n");
             tvResult.setText(stringBuffer.toString());
 

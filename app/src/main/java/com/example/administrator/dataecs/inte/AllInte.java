@@ -10,11 +10,14 @@ import com.example.administrator.dataecs.model.JinJiRequestModle;
 import com.example.administrator.dataecs.model.LoginNewModle;
 import com.example.administrator.dataecs.model.MainListHearModel;
 import com.example.administrator.dataecs.model.PerosonInfoModel;
+import com.example.administrator.dataecs.model.PersonRequestModel;
 import com.example.administrator.dataecs.model.RecordMdel;
 import com.example.administrator.dataecs.model.RenZhenInfoModel;
 import com.example.administrator.dataecs.model.SecondCommitModle;
 import com.example.administrator.dataecs.model.ShenQinCommitModel;
+import com.example.administrator.dataecs.model.SuperLoginModel;
 import com.example.administrator.dataecs.model.TabContentModel;
+import com.example.administrator.dataecs.model.TaoBaoRequestModel;
 import com.example.administrator.dataecs.model.UpdateModel;
 import com.example.administrator.dataecs.model.VerificationCodeModel;
 import com.example.administrator.dataecs.model.WorkInfoModel;
@@ -41,13 +44,16 @@ public interface AllInte {
      * 首页内容
      */
     @POST(BaseServer.MAIN_HEAD)
-    Call<MainListHearModel> getAllData(@Query("currentPage") int currentPage, @Query("pageSize") int pageSize);
+    Call<MainListHearModel> getAllData(@Query("currentPage") int currentPage,
+                                       @Query("pageSize") int pageSize);
 
     /**
      * 首页tab
      */
     @POST(BaseServer.MAIN_HEAD_TAB)
-    Call<TabContentModel> getTabData(@Query("currentPage") int currentPage, @Query("pageSize") int pageSize, @Query("loanType") String loanType);
+    Call<TabContentModel> getTabData(@Query("currentPage") int currentPage,
+                                     @Query("pageSize") int pageSize,
+                                     @Query("loanType") String loanType);
 
     /**
      * 详情页面
@@ -59,20 +65,23 @@ public interface AllInte {
      * 分类页面
      */
     @POST(BaseServer.CLASSI_FICATION)
-    Call<ClassiFicationModel> getClassFiationData(@Query("currentPage") int currentPage, @Query("loanType") String loanType,
-                                                  @Query("range") String range, @Query("pageSize") int pageSize);
+    Call<ClassiFicationModel> getClassFiationData(@Query("currentPage") int currentPage,
+                                                  @Query("loanType") String loanType,
+                                                  @Query("range") String range,
+                                                  @Query("pageSize") int pageSize);
 
     /**
      * 验证码
      */
     @POST(BaseServer.VERIFICATION_CODE)
-    Call<VerificationCodeModel> getVerification(@Query("phone") String phone, @Query("isDury") boolean isDury);
+    Call<VerificationCodeModel> getVerification(@Query("phone") String phone,
+                                                @Query("isDury") boolean isDury);
 
     /**
      * 登录
      */
     @POST(BaseServer.LOGIN)
-    Call<LoginNewModle> getLoginData(@Body RequestBody info);
+    Call<SuperLoginModel> getLoginData(@Body RequestBody info);
 
     /**
      * 更新
@@ -84,7 +93,9 @@ public interface AllInte {
      * 获取用户记录
      */
     @POST(BaseServer.RECORD)
-    Call<RecordMdel> getRecordInfo(@Query("phone") String phone, @Query("currentPage") int currentPage, @Query("pageSize") int pageSize);
+    Call<RecordMdel> getRecordInfo(@Query("phone") String phone,
+                                   @Query("currentPage") int currentPage,
+                                   @Query("pageSize") int pageSize);
 
     /**
      * 提交资料申请
@@ -187,5 +198,34 @@ public interface AllInte {
     @POST(BaseServer.REN_ZHEN_INFO)
     Call<RenZhenInfoModel> getAllinfo(@Query("phone") String phone);
 
+    /**
+     * 注册
+     */
+    @POST(BaseServer.REGISTER_INFO)
+    Call<LoginNewModle> registerInfo(@Body RequestBody registerInfo);
+
+    /**
+     * 注册
+     */
+    @POST(BaseServer.FIND_PASSWORD)
+    Call<LoginNewModle> commitFindPassword(@Body RequestBody registerInfo);
+
+    /**
+     * 身份证识别
+     */
+    @POST(BaseServer.ID_CARD_INFO)
+    Call<PersonRequestModel> commitIdCardInfo(@Body RequestBody registerInfo);
+
+    /**
+     * 人脸识别
+     */
+    @POST(BaseServer.FACE_FOUSE_INFO)
+    Call<PersonRequestModel> commitFaceFouseInfo(@Body RequestBody registerInfo);
+
+    /**
+     * 淘宝认证
+     */
+    @POST(BaseServer.TAO_BAO_ATTESTATION)
+    Call<TaoBaoRequestModel> getTaoBaoInfo();
 
 }

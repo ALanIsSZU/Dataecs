@@ -83,17 +83,16 @@ public class MainActivity extends AppCompatActivity {
     //本地的版本号
     private int vision;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         //获取app的版本号
-        getSysmtemNumber();
+//        getSysmtemNumber();
         //获取审核状态
         if (!SharePreferencesUtil.getUserName(this).equals("")) {
-            getSHType(SharePreferencesUtil.getUserName(this));
+//            getSHType(SharePreferencesUtil.getUserName(this));
         }
         intView();
     }

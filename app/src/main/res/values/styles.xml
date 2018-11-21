@@ -71,4 +71,27 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
     </style>
+
+    <!--输入框 样式-->
+    <style name="demo_edtTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:minWidth">70dp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/xinyan_value</item>
+    </style>
+
+    <style name="demo_edt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@null</item>
+        <item name="android:minWidth">70dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/xinyan_value</item>
+        <item name="android:textColorHint">@color/xinyan_hint_value</item>
+        <item name="android:textSize">15dp</item>
+    </style>
 </resources>

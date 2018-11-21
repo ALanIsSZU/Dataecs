@@ -156,6 +156,10 @@
             android:name=".ui.activity.IDcardActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
 
 
         <!-- 微信支付回调结束 -->

@@ -19,6 +19,7 @@ import com.example.administrator.dataecs.ui.activity.LoginActivity;
 import com.example.administrator.dataecs.ui.activity.RecordActivity;
 import com.example.administrator.dataecs.ui.activity.SettingActivity;
 import com.example.administrator.dataecs.util.BaseServer;
+import com.example.administrator.dataecs.util.Config;
 import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.SharePreferencesUtil;
 
@@ -86,7 +87,7 @@ public class TabMeFragement extends Fragment {
         switch (view.getId()) {
             //登录
             case R.id.login_tab:
-                if (SharePreferencesUtil.getUserName(getActivity()).equals("")) {
+                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
                     Intent run = new Intent(getActivity(), LoginActivity.class);
                     getActivity().startActivity(run);
                 } else {
@@ -97,7 +98,7 @@ public class TabMeFragement extends Fragment {
             //我的账户
             case R.id.back_information:
 
-                if ("".equals(SharePreferencesUtil.getUserName(getActivity()))) {
+                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
 
                     Intent inten3 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(inten3);
@@ -112,7 +113,7 @@ public class TabMeFragement extends Fragment {
             //身份证认证
             case R.id.id_information:
 
-                if ("".equals(SharePreferencesUtil.getUserName(getActivity()))) {
+                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
 
                     Intent inten3 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(inten3);
@@ -131,7 +132,7 @@ public class TabMeFragement extends Fragment {
             //借款记录
             case R.id.record:
 
-                if (!"".equals(SharePreferencesUtil.getUserName(getActivity()))) {
+                if (!"".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
                     Intent intent = new Intent(getActivity(), RecordActivity.class);
                     getActivity().startActivity(intent);
                 } else {
@@ -143,7 +144,7 @@ public class TabMeFragement extends Fragment {
 
             //消息中心
             case R.id.information:
-                if ("".equals(SharePreferencesUtil.getUserName(getActivity()))) {
+                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
 
                     Intent inten3 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(inten3);

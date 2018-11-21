@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.administrator.dataecs.R;
 import com.example.administrator.dataecs.util.BaseServer;
+import com.example.administrator.dataecs.util.Config;
 import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.SharePreferencesUtil;
 import com.example.administrator.dataecs.util.Tools;
@@ -50,13 +51,13 @@ public class SettingActivity extends BaseActivity {
     private void intView() {
 
         back.setVisibility(View.VISIBLE);
-        title.setText("设置");
+        title.setText("关于我们");
 
         verSonName= Tools.getVersionName(this);
         codeTxt.setText("版本号 "+verSonName);
         banBenCode.setText(verSonName);
 
-        if (SharePreferencesUtil.getUserName(this).equals("")) {
+        if ("".equals(SPUtils.get(this, Config.TOKEN_VALUE,""))) {
             exitLogin.setVisibility(View.GONE);
         } else {
             exitLogin.setVisibility(View.VISIBLE);
@@ -79,6 +80,13 @@ public class SettingActivity extends BaseActivity {
                 SPUtils.put(this, BaseServer.BANCK_INFORMATION,false);
                 SPUtils.put(this, BaseServer.ID_INFORMATION,false);
                 SPUtils.put(this, BaseServer.ALL_ATTESTATION,false);
+
+                SPUtils.put(this, Config.TOKEN_VALUE,"");
+                SPUtils.put(this, Config.ID_INFOMATION_PERFECT,false);
+                SPUtils.put(this, Config.TAO_BAO_PERFECT,false);
+                SPUtils.put(this, Config.FACE_FOUSE_PERFECT,false);
+                SPUtils.put(this, Config.ID_CARD_PERFECT,false);
+                SPUtils.put(this, Config.PHONE_STORE_PERFECT,false);
                 finish();
                 break;
         }

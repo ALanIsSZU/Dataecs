@@ -38,9 +38,9 @@ public class BaseServer {
     public static final String ALL_ATTESTATION = "ALL_ATTESTATION";
 
     //正服
-    public static final String BASE_URL = "http://120.79.85.227:80/renren-fast/";
+//    public static final String BASE_URL = "http://120.79.85.227:80/renren-fast/";
     //测服
-//    public static final String BASE_URL = "http://192.168.0.169:8085/renren-fast/";
+    public static final String BASE_URL = "http://192.168.0.168:8080/renren-fast/";
 
     //图片地址拼接
     public static final String BASE_PIC = "http://120.79.85.227";
@@ -165,4 +165,25 @@ public class BaseServer {
      * 获取身份认证的信息
      */
     public static final String REN_ZHEN_INFO =  "app/showPersonInfo";
+
+    /**
+     * 注册
+     */
+    public static final String REGISTER_INFO =  "app/register";
+    /**
+     * 找回密码
+     */
+    public static final String FIND_PASSWORD = "app/forgotPassword";
+    /**
+     * 身份证识别
+     */
+    public static final String ID_CARD_INFO = "app/useridcard/save";
+    /**
+     * 人脸识别
+     */
+    public static final String FACE_FOUSE_INFO = "app/userface/save";
+    /**
+     * 淘宝认证
+     */
+    public static final String TAO_BAO_ATTESTATION = "app/XYencrypt";
 }

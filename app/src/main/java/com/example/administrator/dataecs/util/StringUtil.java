@@ -762,7 +762,8 @@ public class StringUtil {
             }
             luhmSum += k;
         }
-        return (luhmSum % 10 == 0) ? '0' : (char) ((10 - luhmSum % 10) + '0');      }
+        return (luhmSum % 10 == 0) ? '0' : (char) ((10 - luhmSum % 10) + '0');
+    }
 
 
 }
