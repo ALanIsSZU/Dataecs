@@ -10,10 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.dataecs.R;
-import com.example.administrator.dataecs.inte.AllInte;
 import com.example.administrator.dataecs.model.JinJiAddModle;
-import com.example.administrator.dataecs.model.JinJiRequestModle;
-import com.example.administrator.dataecs.util.BaseServer;
 import com.example.administrator.dataecs.util.SharePreferencesUtil;
 import com.example.administrator.dataecs.util.StringUtil;
 import com.example.administrator.dataecs.util.SystemUntils;
@@ -27,15 +24,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class JinJIAddInfoActivity extends AppCompatActivity {
 
@@ -112,7 +103,7 @@ public class JinJIAddInfoActivity extends AppCompatActivity {
             Toast.makeText(this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
             return;
         }
-
+/*
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BaseServer.BASE_URL)
@@ -138,7 +129,7 @@ public class JinJIAddInfoActivity extends AppCompatActivity {
             public void onFailure(Call<JinJiRequestModle> call, Throwable t) {
                 ToastUntils.ToastShort(JinJIAddInfoActivity.this, "提交失败，请检查网络!");
             }
-        });
+        });*/
 
     }
 

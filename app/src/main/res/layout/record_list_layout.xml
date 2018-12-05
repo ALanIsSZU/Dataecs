@@ -1,94 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp">
-
+    android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
-            <ImageView
-                android:id="@+id/img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/dai_logo"/>
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/card_back">
 
-            <TextView
-                android:id="@+id/txt"
-                android:layout_toRightOf="@+id/img"
-                android:layout_marginLeft="11dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#333333"
-                android:textSize="13sp"
-                android:text="贷现-支付宝代还"/>
 
-            <LinearLayout
-                android:id="@+id/lay_1"
-                android:layout_marginTop="23dp"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_below="@+id/img"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:paddingTop="20dp"
+                    android:src="@drawable/dai_logo" />
 
                 <TextView
-                    android:id="@+id/name"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:id="@+id/txt"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/tip_n"
-                    android:textSize="13sp"/>
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/img"
+                    android:textColor="#333333"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/number"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <ImageView
+                    android:id="@+id/shen_he_type"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/tip_n"
-                    android:textSize="13sp"/>
+                    android:layout_alignParentRight="true" />
 
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/lay_2"
-                android:layout_below="@+id/lay_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/channel"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <LinearLayout
+                    android:id="@+id/lay_1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/tip_n"
-                    android:textSize="13sp"/>
+                    android:layout_below="@+id/img"
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/money_type"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/tip_n"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/tip_n"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lay_2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/tip_n"
-                    android:textSize="15sp"/>
-            </LinearLayout>
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/lay_1"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/channel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/tip_n"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:id="@+id/other_lay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/yu_qi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/select_backgromund_touch"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="5dp"
+                            android:text="展期"
+                            android:textSize="13sp"
+                            android:textColor="@color/new_title" />
+
+                        <TextView
+                            android:id="@+id/huan_kuan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingLeft="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:textSize="13sp"
+                            android:background="@drawable/select_backgromund_touch"
+                            android:text="还款"
+                            android:textColor="@color/new_title" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
 
         </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
 
 
 </RelativeLayout>

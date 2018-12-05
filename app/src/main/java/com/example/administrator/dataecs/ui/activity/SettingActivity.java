@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.dataecs.R;
+import com.example.administrator.dataecs.dialog.AlertDialog;
 import com.example.administrator.dataecs.util.BaseServer;
 import com.example.administrator.dataecs.util.Config;
 import com.example.administrator.dataecs.util.SPUtils;
@@ -51,13 +52,13 @@ public class SettingActivity extends BaseActivity {
     private void intView() {
 
         back.setVisibility(View.VISIBLE);
-        title.setText("关于我们");
+        title.setText("设置");
 
-        verSonName= Tools.getVersionName(this);
-        codeTxt.setText("版本号 "+verSonName);
+        verSonName = Tools.getVersionName(this);
+        codeTxt.setText("版本号 " + verSonName);
         banBenCode.setText(verSonName);
 
-        if ("".equals(SPUtils.get(this, Config.TOKEN_VALUE,""))) {
+        if ("".equals(SPUtils.get(this, Config.TOKEN_VALUE, ""))) {
             exitLogin.setVisibility(View.GONE);
         } else {
             exitLogin.setVisibility(View.VISIBLE);
@@ -75,19 +76,42 @@ public class SettingActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.exit_login:
-                SharePreferencesUtil.saveUserInfo(this, "");
-                SharePreferencesUtil.saveShenQing(this, 4);
-                SPUtils.put(this, BaseServer.BANCK_INFORMATION,false);
-                SPUtils.put(this, BaseServer.ID_INFORMATION,false);
-                SPUtils.put(this, BaseServer.ALL_ATTESTATION,false);
 
-                SPUtils.put(this, Config.TOKEN_VALUE,"");
-                SPUtils.put(this, Config.ID_INFOMATION_PERFECT,false);
-                SPUtils.put(this, Config.TAO_BAO_PERFECT,false);
-                SPUtils.put(this, Config.FACE_FOUSE_PERFECT,false);
-                SPUtils.put(this, Config.ID_CARD_PERFECT,false);
-                SPUtils.put(this, Config.PHONE_STORE_PERFECT,false);
-                finish();
+                new AlertDialog(this).builder()
+                        .setMsg("是否退出")
+                        .setPositiveButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                SharePreferencesUtil.saveUserInfo(SettingActivity.this, "");
+                                SPUtils.put(SettingActivity.this, BaseServer.BANCK_INFORMATION, false);
+                                SPUtils.put(SettingActivity.this, BaseServer.ID_INFORMATION, false);
+                                SPUtils.put(SettingActivity.this, BaseServer.ALL_ATTESTATION, false);
+
+                                SharePreferencesUtil.saveShenQing(SettingActivity.this, 4);
+                                SPUtils.put(SettingActivity.this, Config.TOKEN_VALUE, "");
+                                SPUtils.put(SettingActivity.this, Config.ID_INFOMATION_PERFECT, false);
+                                SPUtils.put(SettingActivity.this, Config.TAO_BAO_PERFECT, false);
+                                SPUtils.put(SettingActivity.this, Config.FACE_FOUSE_PERFECT, false);
+                                SPUtils.put(SettingActivity.this, Config.ID_CARD_PERFECT, false);
+                                SPUtils.put(SettingActivity.this, Config.PHONE_STORE_PERFECT, false);
+                                SPUtils.put(SettingActivity.this, Config.BANCK_PERFECT, false);
+
+                                SPUtils.put(SettingActivity.this, Config.ONCE_SELECT_DAY, 0);
+                                SPUtils.put(SettingActivity.this, Config.SECOND_SELECT_DAY, 0);
+                                SPUtils.put(SettingActivity.this, Config.THIRD_SELECT_DAY, 0);
+                                SPUtils.put(SettingActivity.this, Config.FOURTH_SELECT_DAY, 0);
+
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        })
+                        .show();
+
                 break;
         }
     }

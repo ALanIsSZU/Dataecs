@@ -21,9 +21,11 @@ import com.example.administrator.dataecs.model.SuperLoginModel;
 import com.example.administrator.dataecs.util.BaseServer;
 import com.example.administrator.dataecs.util.Config;
 import com.example.administrator.dataecs.util.SPUtils;
+import com.example.administrator.dataecs.util.SharePreferencesUtil;
 import com.example.administrator.dataecs.util.StringUtil;
 import com.example.administrator.dataecs.util.SystemUntils;
 import com.example.administrator.dataecs.util.ToastUntils;
+import com.example.administrator.dataecs.util.Tools;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -177,6 +179,47 @@ public class LoginActivity extends AppCompatActivity {
                     SPUtils.put(LoginActivity.this, Config.PHONE_VALUE, model.getMap().getMobile());
                     SPUtils.put(LoginActivity.this, Config.USED_ID, model.getMap().getUserId());
                     SPUtils.put(LoginActivity.this, Config.TOKEN_VALUE, model.getMap().getToken());
+                    SPUtils.put(LoginActivity.this, Config.MAX_MONEY, model.getMap().getParameter().getLimits());
+                    SharePreferencesUtil.saveShenQing(LoginActivity.this, 0);
+
+                    //认证状态
+
+                    SPUtils.put(LoginActivity.this, Config.TAO_BAO_PERFECT, model.getMap().getUserStatus().getZhifubaoStatus() == 0 ? false : true);
+
+                    SPUtils.put(LoginActivity.this, Config.ID_CARD_PERFECT, model.getMap().getUserStatus().getIdCardStatus() == 0 ? false : true);
+
+                    SPUtils.put(LoginActivity.this, Config.ID_INFOMATION_PERFECT, model.getMap().getUserStatus().getDataStatus() == 0 ? false : true);
+
+                    SPUtils.put(LoginActivity.this, Config.PHONE_STORE_PERFECT, model.getMap().getUserStatus().getOperatorStatus() == 0 ? false : true);
+
+                    SPUtils.put(LoginActivity.this, Config.FACE_FOUSE_PERFECT, model.getMap().getUserStatus().getFaceStatus() == 0 ? false : true);
+
+                    SPUtils.put(LoginActivity.this, Config.BANCK_PERFECT, model.getMap().getUserStatus().getBankStatus() == 0 ? false : true);
+
+                    SPUtils.put(LoginActivity.this, Config.RATE_OF_INTEREST, model.getMap().getParameter().getRate());
+
+                    //利率
+                    SPUtils.put(LoginActivity.this, Config.RATE_OF_INTEREST,model.getMap().getParameter().getRate());
+
+                    int[] size = new int[4];
+
+                    String days = model.getMap().getParameter().getLoanDay();
+                    String[] dayArray = days.split(",");
+
+                    for (int i = 0; i < dayArray.length; i++) {
+
+                        size[i] = Integer.valueOf(dayArray[i]).intValue();
+                    }
+
+                    if (dayArray.length < 4 ) {
+
+                        for (int i = 0; i < size.length - dayArray.length; i++) {
+                            size[dayArray.length + i ] = 0;
+                        }
+                    }
+
+                    Tools.saveDay(LoginActivity.this, size[0], size[1], size[2], size[3]);
+
                     finish();
 
                 } else {

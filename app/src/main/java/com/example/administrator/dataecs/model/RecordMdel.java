@@ -8,7 +8,7 @@ public class RecordMdel {
     /**
      * msg : success
      * code : 0
-     * page : {"totalCount":3,"pageSize":10,"totalPage":1,"currPage":1,"list":[{"id":12,"userMobile":"13763589512","loanMonery":789798,"loanTime":"2018-10-04 00:00:00","repayTime":"2018-10-19 00:00:00","overday":0,"expectTime":null,"createTime":"2018-10-31 16:46:04","name":"任建余","source":null},{"id":14,"userMobile":"13763589512","loanMonery":798798,"loanTime":"2018-10-02 00:00:00","repayTime":"2018-10-11 00:00:00","overday":0,"expectTime":null,"createTime":"2018-10-31 17:14:46","name":"任建余","source":null},{"id":15,"userMobile":"13763589512","loanMonery":8798798,"loanTime":"2018-10-10 00:00:00","repayTime":"2018-10-05 00:00:00","overday":0,"expectTime":null,"createTime":"2018-10-31 17:16:24","name":"任建余","source":null}]}
+     * page : {"totalCount":5,"pageSize":10,"totalPage":1,"currPage":1,"list":[{"status":"已逾期","statusCode":7,"id":1,"userid":3,"indentStatus":3,"statusId":3,"annotation":"终审通过","financeid":1,"financeStatus":1,"repaymentsid":1,"repaymentsStatus":1,"overdueid":1,"idCard":null,"moeny":null,"name":"fucker","number":"111111111","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null},{"status":"审核中","statusCode":1,"id":2,"userid":3,"indentStatus":1,"statusId":1,"annotation":"审核中","financeid":null,"financeStatus":0,"repaymentsid":null,"repaymentsStatus":0,"overdueid":null,"idCard":null,"moeny":null,"name":"金阳","number":"15625226978","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null},{"status":"审核中","statusCode":1,"id":3,"userid":3,"indentStatus":1,"statusId":1,"annotation":"审核中","financeid":null,"financeStatus":0,"repaymentsid":null,"repaymentsStatus":0,"overdueid":null,"idCard":null,"moeny":null,"name":"金阳","number":"15625226978","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null},{"status":"审核中","statusCode":1,"id":4,"userid":3,"indentStatus":1,"statusId":1,"annotation":"审核中","financeid":null,"financeStatus":0,"repaymentsid":null,"repaymentsStatus":0,"overdueid":null,"idCard":null,"moeny":null,"name":"金阳","number":"15625226978","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null},{"status":"审核中","statusCode":1,"id":5,"userid":3,"indentStatus":1,"statusId":1,"annotation":"审核中","financeid":null,"financeStatus":0,"repaymentsid":null,"repaymentsStatus":0,"overdueid":null,"idCard":null,"moeny":null,"name":"金阳","number":"15625226978","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null}]}
      */
 
     private String msg;
@@ -41,11 +41,11 @@ public class RecordMdel {
 
     public static class PageBean {
         /**
-         * totalCount : 3
+         * totalCount : 5
          * pageSize : 10
          * totalPage : 1
          * currPage : 1
-         * list : [{"id":12,"userMobile":"13763589512","loanMonery":789798,"loanTime":"2018-10-04 00:00:00","repayTime":"2018-10-19 00:00:00","overday":0,"expectTime":null,"createTime":"2018-10-31 16:46:04","name":"任建余","source":null},{"id":14,"userMobile":"13763589512","loanMonery":798798,"loanTime":"2018-10-02 00:00:00","repayTime":"2018-10-11 00:00:00","overday":0,"expectTime":null,"createTime":"2018-10-31 17:14:46","name":"任建余","source":null},{"id":15,"userMobile":"13763589512","loanMonery":8798798,"loanTime":"2018-10-10 00:00:00","repayTime":"2018-10-05 00:00:00","overday":0,"expectTime":null,"createTime":"2018-10-31 17:16:24","name":"任建余","source":null}]
+         * list : [{"status":"已逾期","statusCode":7,"id":1,"userid":3,"indentStatus":3,"statusId":3,"annotation":"终审通过","financeid":1,"financeStatus":1,"repaymentsid":1,"repaymentsStatus":1,"overdueid":1,"idCard":null,"moeny":null,"name":"fucker","number":"111111111","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null},{"status":"审核中","statusCode":1,"id":2,"userid":3,"indentStatus":1,"statusId":1,"annotation":"审核中","financeid":null,"financeStatus":0,"repaymentsid":null,"repaymentsStatus":0,"overdueid":null,"idCard":null,"moeny":null,"name":"金阳","number":"15625226978","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null},{"status":"审核中","statusCode":1,"id":3,"userid":3,"indentStatus":1,"statusId":1,"annotation":"审核中","financeid":null,"financeStatus":0,"repaymentsid":null,"repaymentsStatus":0,"overdueid":null,"idCard":null,"moeny":null,"name":"金阳","number":"15625226978","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null},{"status":"审核中","statusCode":1,"id":4,"userid":3,"indentStatus":1,"statusId":1,"annotation":"审核中","financeid":null,"financeStatus":0,"repaymentsid":null,"repaymentsStatus":0,"overdueid":null,"idCard":null,"moeny":null,"name":"金阳","number":"15625226978","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null},{"status":"审核中","statusCode":1,"id":5,"userid":3,"indentStatus":1,"statusId":1,"annotation":"审核中","financeid":null,"financeStatus":0,"repaymentsid":null,"repaymentsStatus":0,"overdueid":null,"idCard":null,"moeny":null,"name":"金阳","number":"15625226978","orderId":null,"days":0,"postponeTime":null,"repaymentsTime":null,"advance":null,"passingTime":null,"overdueDays":0,"serviceCharge":null}]
          */
 
         private int totalCount;
@@ -96,91 +96,200 @@ public class RecordMdel {
 
         public static class ListBean {
             /**
-             * id : 12
-             * userMobile : 13763589512
-             * loanMonery : 789798
-             * loanTime : 2018-10-04 00:00:00
-             * repayTime : 2018-10-19 00:00:00
-             * overday : 0
-             * expectTime : null
-             * createTime : 2018-10-31 16:46:04
-             * name : 任建余
-             * source : null
+             * status : 已逾期
+             * statusCode : 7
+             * id : 1
+             * userid : 3
+             * indentStatus : 3
+             * statusId : 3
+             * annotation : 终审通过
+             * financeid : 1
+             * financeStatus : 1
+             * repaymentsid : 1
+             * repaymentsStatus : 1
+             * overdueid : 1
+             * idCard : null
+             * moeny : null
+             * name : fucker
+             * number : 111111111
+             * orderId : 订单编号
+             * days : 日期
+             * postponeTime : 展期时间
+             * repaymentsTime : 还款时间
+             * advance : null
+             * passingTime : null
+             * overdueDays : //逾期天数
+             * serviceCharge : null
              */
 
-            private int id;
-            private String userMobile;
-            private int loanMonery;
-            private String loanTime;
-            private String repayTime;
-            private int overday;
-            private Object expectTime;
-            private String createTime;
-            private String name;
-            private Object source;
+            private String status;
+            private int statusCode;
 
-            public int getId() {
+            private long id;
+
+            private int userid;
+            private int indentStatus;
+            private int statusId;
+            private String annotation;
+            private int financeid;
+            private int financeStatus;
+            private int repaymentsid;
+            private int repaymentsStatus;
+            private int overdueid;
+            private Object idCard;
+            private double moeny;
+            private String repaymentsTime;
+
+            private String name;
+            private String number;
+
+            private String orderId;
+
+            private int days;
+
+            private
+            String postponeTime;
+            private Object advance;
+            private Object passingTime;
+            private int overdueDays;
+            private double serviceCharge;
+
+
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
-            public String getUserMobile() {
-                return userMobile;
+            public double getServiceCharge() {
+                return serviceCharge;
             }
 
-            public void setUserMobile(String userMobile) {
-                this.userMobile = userMobile;
+            public void setServiceCharge(double serviceCharge) {
+                this.serviceCharge = serviceCharge;
             }
 
-            public int getLoanMonery() {
-                return loanMonery;
+            public String getOrderId() {
+                return orderId;
             }
 
-            public void setLoanMonery(int loanMonery) {
-                this.loanMonery = loanMonery;
+            public void setOrderId(String orderId) {
+                this.orderId = orderId;
             }
 
-            public String getLoanTime() {
-                return loanTime;
+            public double getMoeny() {
+                return moeny;
             }
 
-            public void setLoanTime(String loanTime) {
-                this.loanTime = loanTime;
+            public void setMoeny(double moeny) {
+                this.moeny = moeny;
             }
 
-            public String getRepayTime() {
-                return repayTime;
+            public String getRepaymentsTime() {
+                return repaymentsTime;
             }
 
-            public void setRepayTime(String repayTime) {
-                this.repayTime = repayTime;
+            public void setRepaymentsTime(String repaymentsTime) {
+                this.repaymentsTime = repaymentsTime;
             }
 
-            public int getOverday() {
-                return overday;
+            public String getStatus() {
+                return status;
             }
 
-            public void setOverday(int overday) {
-                this.overday = overday;
+            public void setStatus(String status) {
+                this.status = status;
             }
 
-            public Object getExpectTime() {
-                return expectTime;
+            public int getStatusCode() {
+                return statusCode;
             }
 
-            public void setExpectTime(Object expectTime) {
-                this.expectTime = expectTime;
+            public void setStatusCode(int statusCode) {
+                this.statusCode = statusCode;
             }
 
-            public String getCreateTime() {
-                return createTime;
+
+            public int getUserid() {
+                return userid;
             }
 
-            public void setCreateTime(String createTime) {
-                this.createTime = createTime;
+            public void setUserid(int userid) {
+                this.userid = userid;
+            }
+
+            public int getIndentStatus() {
+                return indentStatus;
+            }
+
+            public void setIndentStatus(int indentStatus) {
+                this.indentStatus = indentStatus;
+            }
+
+            public int getStatusId() {
+                return statusId;
+            }
+
+            public void setStatusId(int statusId) {
+                this.statusId = statusId;
+            }
+
+            public String getAnnotation() {
+                return annotation;
+            }
+
+            public void setAnnotation(String annotation) {
+                this.annotation = annotation;
+            }
+
+            public int getFinanceid() {
+                return financeid;
+            }
+
+            public void setFinanceid(int financeid) {
+                this.financeid = financeid;
+            }
+
+            public int getFinanceStatus() {
+                return financeStatus;
+            }
+
+            public void setFinanceStatus(int financeStatus) {
+                this.financeStatus = financeStatus;
+            }
+
+            public int getRepaymentsid() {
+                return repaymentsid;
+            }
+
+            public void setRepaymentsid(int repaymentsid) {
+                this.repaymentsid = repaymentsid;
+            }
+
+            public int getRepaymentsStatus() {
+                return repaymentsStatus;
+            }
+
+            public void setRepaymentsStatus(int repaymentsStatus) {
+                this.repaymentsStatus = repaymentsStatus;
+            }
+
+            public int getOverdueid() {
+                return overdueid;
+            }
+
+            public void setOverdueid(int overdueid) {
+                this.overdueid = overdueid;
+            }
+
+            public Object getIdCard() {
+                return idCard;
+            }
+
+            public void setIdCard(Object idCard) {
+                this.idCard = idCard;
             }
 
             public String getName() {
@@ -191,12 +300,53 @@ public class RecordMdel {
                 this.name = name;
             }
 
-            public Object getSource() {
-                return source;
+            public String getNumber() {
+                return number;
             }
 
-            public void setSource(Object source) {
-                this.source = source;
+            public void setNumber(String number) {
+                this.number = number;
+            }
+
+            public int getDays() {
+                return days;
+            }
+
+            public void setDays(int days) {
+                this.days = days;
+            }
+
+
+            public Object getAdvance() {
+                return advance;
+            }
+
+            public void setAdvance(Object advance) {
+                this.advance = advance;
+            }
+
+            public Object getPassingTime() {
+                return passingTime;
+            }
+
+            public void setPassingTime(Object passingTime) {
+                this.passingTime = passingTime;
+            }
+
+            public int getOverdueDays() {
+                return overdueDays;
+            }
+
+            public void setOverdueDays(int overdueDays) {
+                this.overdueDays = overdueDays;
+            }
+
+            public String getPostponeTime() {
+                return postponeTime;
+            }
+
+            public void setPostponeTime(String postponeTime) {
+                this.postponeTime = postponeTime;
             }
         }
     }

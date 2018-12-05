@@ -22,7 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
+            <include
+                android:id="@+id/borrow_money_layout"
+                layout="@layout/borrow_money_lay"
+                android:visibility="gone"/>
             <RelativeLayout
                 android:id="@+id/login_layout"
                 android:layout_width="match_parent"

@@ -1,18 +1,26 @@
 package com.example.administrator.dataecs.inte;
 
+import com.example.administrator.dataecs.model.AgreementModel;
+import com.example.administrator.dataecs.model.BanckCardRequsetModel;
 import com.example.administrator.dataecs.model.BankInfoModel;
 import com.example.administrator.dataecs.model.CheckInfoModel;
 import com.example.administrator.dataecs.model.ClassiFicationModel;
 import com.example.administrator.dataecs.model.CompanyModel;
+import com.example.administrator.dataecs.model.DaiKuanModel;
+import com.example.administrator.dataecs.model.HelpModel;
+import com.example.administrator.dataecs.model.HuanKuanInfoModle;
+import com.example.administrator.dataecs.model.InformationContentModel;
 import com.example.administrator.dataecs.model.IsPerfectModel;
 import com.example.administrator.dataecs.model.JinJiInfoModel;
 import com.example.administrator.dataecs.model.JinJiRequestModle;
 import com.example.administrator.dataecs.model.LoginNewModle;
 import com.example.administrator.dataecs.model.MainListHearModel;
+import com.example.administrator.dataecs.model.PerfectTypeModel;
 import com.example.administrator.dataecs.model.PerosonInfoModel;
 import com.example.administrator.dataecs.model.PersonRequestModel;
 import com.example.administrator.dataecs.model.RecordMdel;
 import com.example.administrator.dataecs.model.RenZhenInfoModel;
+import com.example.administrator.dataecs.model.RequsetMailModel;
 import com.example.administrator.dataecs.model.SecondCommitModle;
 import com.example.administrator.dataecs.model.ShenQinCommitModel;
 import com.example.administrator.dataecs.model.SuperLoginModel;
@@ -22,6 +30,7 @@ import com.example.administrator.dataecs.model.UpdateModel;
 import com.example.administrator.dataecs.model.VerificationCodeModel;
 import com.example.administrator.dataecs.model.WorkInfoModel;
 import com.example.administrator.dataecs.model.XiangQingModel;
+import com.example.administrator.dataecs.model.ZhangQiModle;
 import com.example.administrator.dataecs.model.ZhiFuAutoInfoModel;
 import com.example.administrator.dataecs.model.ZhiFuModel;
 import com.example.administrator.dataecs.model.ZhiFuUrlModel;
@@ -93,9 +102,9 @@ public interface AllInte {
      * 获取用户记录
      */
     @POST(BaseServer.RECORD)
-    Call<RecordMdel> getRecordInfo(@Query("phone") String phone,
-                                   @Query("currentPage") int currentPage,
-                                   @Query("pageSize") int pageSize);
+    Call<RecordMdel> getRecordInfo(@Query("userid") Long userid,
+                                   @Query("pageSize") int pageSize,
+                                   @Query("currPage") int currPage);
 
     /**
      * 提交资料申请
@@ -136,19 +145,25 @@ public interface AllInte {
      * 提交紧急联系人信息
      */
     @POST(BaseServer.COMMIT_JIN_JI_NIFO)
-    Call<JinJiRequestModle> commitJinJiInfo(@Body RequestBody info);
+    Call<BanckCardRequsetModel> commitJinJiInfo(@Body RequestBody info);
 
     /**
      * 提交银行卡信息
      */
     @POST(BaseServer.COMMIT_BANCK_INFO)
-    Call<JinJiRequestModle> commiBanckInfo(@Body RequestBody info);
+    Call<BanckCardRequsetModel> commiBanckInfo(@Query("userid") long userid,
+                                               @Query("idcard") String idcard,
+                                               @Query("bankNumber") String bankNumber,
+                                               @Query("phone") String phone,
+                                               @Query("username") String username);
 
     /**
      * 获取银行卡信息
      */
     @POST(BaseServer.GET_BANCK_INFO)
-    Call<BankInfoModel> getBanckInfo(@Query("phone") String phone);
+    Call<BankInfoModel> getBanckInfo(@Query("userid") long userid,
+                                     @Query("currPage") int currPage,
+                                     @Query("pageSize") int pageSize);
 
     /**
      * 获取验证中心的验证状态
@@ -226,6 +241,67 @@ public interface AllInte {
      * 淘宝认证
      */
     @POST(BaseServer.TAO_BAO_ATTESTATION)
-    Call<TaoBaoRequestModel> getTaoBaoInfo();
+    Call<TaoBaoRequestModel> getTaoBaoInfo(@Query("roleid") Long roleid);
+
+    /**
+     * 提交贷款
+     */
+    @POST(BaseServer.COMMIT_REPAY)
+    Call<DaiKuanModel> commitDaiKuang(@Query("userid") Long userid,
+                                      @Query("money") double money,
+                                      @Query("repaymentTime") String repaymentTime,
+                                      @Query("days") int days);
+
+    /**
+     * 帮助中心
+     */
+    @POST(BaseServer.HELP_CENTER)
+    Call<HelpModel> getHelpInfo(@Query("roleid") Long roleid);
+
+    /**
+     * 展期申请
+     */
+    @POST(BaseServer.Z_Q_COMMIT)
+    Call<ZhangQiModle> ZQCommit(@Body RequestBody registerInfo);
+
+    /**
+     * 还款
+     */
+    @POST(BaseServer.REPAY_MONEY)
+    Call<ZhangQiModle> repayCommit(@Query("tbUserIndentId") long tbUserIndentId);
+
+    /**
+     * 查看是否完善
+     */
+    @POST(BaseServer.PERFECT_TYPE)
+    Call<PerfectTypeModel> getPerfectType(@Query("userid") long userid);
+
+    /**
+     * 获取个人资料
+     */
+    @POST(BaseServer.GET_ALL_PERSON_INFO)
+    Call<RequsetMailModel> getAllInfo(@Query("userid") long userid);
+
+    /**
+     * 获取消息
+     */
+    @POST(BaseServer.get_informaytion_content)
+    Call<InformationContentModel> getInfomationContent(@Query("roleid") long roleid,
+                                                       @Query("currPage") int currPage,
+                                                       @Query("pageSize") int pageSize);
+
+    /**
+     * 获取借款天数和利率
+     */
+    @POST(BaseServer.GET_ALL_INFO)
+    Call<HuanKuanInfoModle> getDayandOther(@Query("roleid") long roleid,
+                                           @Query("userid") long userid);
+
+    /**
+     * 获取借款协议
+     */
+    @POST(BaseServer.AGREEMENT_INFO)
+    Call<AgreementModel> getAgreementInfo(@Query("roleid") long roleid);
+
 
 }

@@ -6,32 +6,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.dataecs.R;
 import com.example.administrator.dataecs.inte.AllInte;
-import com.example.administrator.dataecs.model.BanckCommitModle;
-import com.example.administrator.dataecs.model.JinJiRequestModle;
+import com.example.administrator.dataecs.model.BanckCardRequsetModel;
 import com.example.administrator.dataecs.util.BaseServer;
+import com.example.administrator.dataecs.util.Config;
 import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.SharePreferencesUtil;
 import com.example.administrator.dataecs.util.StringUtil;
 import com.example.administrator.dataecs.util.SystemUntils;
 import com.example.administrator.dataecs.util.ToastUntils;
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Interceptor;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,11 +46,15 @@ public class AddBanckCardActivity extends AppCompatActivity {
     EditText yinhanka;
     @BindView(R.id.commit_btn)
     TextView commitBtn;
+    @BindView(R.id.content_lay)
+    LinearLayout contentLay;
+    @BindView(R.id.loading_lay)
+    View loadingLay;
 
     //登录手机号
     String loginPhone;
 
-    boolean isPerfect=false;
+    boolean isPerfect = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,85 +92,67 @@ public class AddBanckCardActivity extends AppCompatActivity {
                     return;
                 }
 
-                BanckCommitModle banckInfo = new BanckCommitModle();
-                banckInfo.setUserMobile(loginPhone);
-                banckInfo.setName(name.getText().toString());
-                banckInfo.setIdNumber(idCord.getText().toString());
-                banckInfo.setCard(yinhanka.getText().toString());
-                banckInfo.setPhone(phone.getText().toString());
-
-                String json = new Gson().toJson(banckInfo);
-                commitBankInfo(json);
+//                BanckCommitModle banckInfo = new BanckCommitModle();
+//                banckInfo.setUserMobile(loginPhone);
+//                banckInfo.setName(name.getText().toString());
+//                banckInfo.setIdNumber(idCord.getText().toString());
+//                banckInfo.setCard(yinhanka.getText().toString());
+//                banckInfo.setPhone(phone.getText().toString());
+//
+//                String json = new Gson().toJson(banckInfo);
+                commitBankInfo(
+                        (long) SPUtils.get(this, Config.USED_ID, 1L),
+                        idCord.getText().toString().trim(),
+                        yinhanka.getText().toString().trim(),
+                        phone.getText().toString().trim(),
+                        name.getText().toString().trim()
+                );
 
                 break;
         }
     }
 
-    public void commitBankInfo(String json) {
+    public void commitBankInfo(long userid, final String idCard, String banckNumber,
+                               String phone, String userName) {
 
         if (!SystemUntils.isNetworkConnected(this)) {
             Toast.makeText(this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        loadingLay.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BaseServer.BASE_URL)
-                .client(genericClient(body))
+
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         final AllInte inte = retrofit.create(AllInte.class);
-        Call<JinJiRequestModle> call = inte.commiBanckInfo(body);
+        Call<BanckCardRequsetModel> call = inte.commiBanckInfo(userid, idCard, banckNumber, phone, userName);
 
-        call.enqueue(new Callback<JinJiRequestModle>() {
+        call.enqueue(new Callback<BanckCardRequsetModel>() {
             @Override
-            public void onResponse(Call<JinJiRequestModle> call, Response<JinJiRequestModle> response) {
+            public void onResponse(Call<BanckCardRequsetModel> call, Response<BanckCardRequsetModel> response) {
 
-                JinJiRequestModle modle = response.body();
-                if (modle.getMap().getCode() == 0) {
-                    //添加成功
-                    ToastUntils.ToastShort(AddBanckCardActivity.this, modle.getMap().getResult());
-
-                    SPUtils.put(AddBanckCardActivity.this,BaseServer.BANCK_INFORMATION,true);
+                BanckCardRequsetModel modle = response.body();
+                if ("success".equals(modle.getMap().getRes())) {
+                    ToastUntils.ToastShort(AddBanckCardActivity.this, modle.getMap().getMsg());
+                    SPUtils.put(AddBanckCardActivity.this,Config.BANCK_PERFECT,true);
+                    loadingLay.setVisibility(View.GONE);
                     finish();
                 } else {
-                    //添加失败
-                    ToastUntils.ToastShort(AddBanckCardActivity.this, modle.getMap().getResult());
+                    ToastUntils.ToastShort(AddBanckCardActivity.this, modle.getMap().getMsg());
+                    loadingLay.setVisibility(View.GONE);
                 }
-
             }
 
             @Override
-            public void onFailure(Call<JinJiRequestModle> call, Throwable t) {
-                ToastUntils.ToastShort(AddBanckCardActivity.this, "提交失败，请检查网络");
+            public void onFailure(Call<BanckCardRequsetModel> call, Throwable t) {
+                ToastUntils.ToastShort(AddBanckCardActivity.this, "请求失败！" + t.toString());
+                loadingLay.setVisibility(View.GONE);
             }
         });
-
     }
-
-    public static OkHttpClient genericClient(final RequestBody body) {
-
-        OkHttpClient httpClient = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public okhttp3.Response intercept(Chain chain) throws IOException {
-                        Request request = chain.request();
-                        Request.Builder requestBuilder = request.newBuilder();
-                        request = requestBuilder
-                                .addHeader("Content-Type", "application/json;charset=UTF-8")
-                                .post(body)//关键部分，设置requestBody的编码格式为json
-                                .build();
-                        return chain.proceed(request);
-                    }
-                })
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .build();
-        return httpClient;
-    }
-
 
 
 }

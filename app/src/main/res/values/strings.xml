@@ -16,4 +16,7 @@
 
     <!--首页跑马灯的轮播信息-->
     <string name="content1"><![CDATA[<font color="#e9575c">%1$s</font><font color="#000000">%2$s</font>]]></string>
+    <!--借款页面跑马灯的轮播信息-->
+    <string name="content"><![CDATA[<font color="#000000">%1$s</font><font color="#64B8FF">%2$s</font><font color="#000000">%3$s</font>]]></string>
+
 </resources>

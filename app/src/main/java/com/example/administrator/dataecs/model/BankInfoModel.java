@@ -8,12 +8,12 @@ public class BankInfoModel {
     /**
      * msg : success
      * code : 0
-     * list : [{"id":1,"name":"fucker","idNumber":"123456789012345678","card":"1234567890123456","bankname":"中国银行","banktype":"储蓄卡","phone":"12345678901","userId":null,"createTime":"2018-10-08 10:02:55","userMobile":"15625226978"},{"id":2,"name":"fucker","idNumber":"123456789012345678","card":"1234567890123454","bankname":"中国银行","banktype":"信用卡","phone":"12345678902","userId":null,"createTime":"2018-10-08 10:05:41","userMobile":"15625226978"}]
+     * page : {"totalCount":1,"pageSize":10,"totalPage":1,"currPage":1,"list":[{"id":1,"tbUserId":3,"bankName":"招商银行","bankKind":"招商银行信用卡","bankNumber":"6225756663322156","reservedNumber":"15625226978","bankType":"信用卡","bankCode":"CMB"}]}
      */
 
     private String msg;
     private int code;
-    private List<ListBean> list;
+    private PageBean page;
 
     public String getMsg() {
         return msg;
@@ -31,117 +31,153 @@ public class BankInfoModel {
         this.code = code;
     }
 
-    public List<ListBean> getList() {
-        return list;
+    public PageBean getPage() {
+        return page;
     }
 
-    public void setList(List<ListBean> list) {
-        this.list = list;
+    public void setPage(PageBean page) {
+        this.page = page;
     }
 
-    public static class ListBean {
+    public static class PageBean {
         /**
-         * id : 1
-         * name : fucker
-         * idNumber : 123456789012345678
-         * card : 1234567890123456
-         * bankname : 中国银行
-         * banktype : 储蓄卡
-         * phone : 12345678901
-         * userId : null
-         * createTime : 2018-10-08 10:02:55
-         * userMobile : 15625226978
+         * totalCount : 1
+         * pageSize : 10
+         * totalPage : 1
+         * currPage : 1
+         * list : [{"id":1,"tbUserId":3,"bankName":"招商银行","bankKind":"招商银行信用卡","bankNumber":"6225756663322156","reservedNumber":"15625226978","bankType":"信用卡","bankCode":"CMB"}]
          */
 
-        private int id;
-        private String name;
-        private String idNumber;
-        private String card;
-        private String bankname;
-        private String banktype;
-        private String phone;
-        private Object userId;
-        private String createTime;
-        private String userMobile;
+        private int totalCount;
+        private int pageSize;
+        private int totalPage;
+        private int currPage;
+        private List<ListBean> list;
 
-        public int getId() {
-            return id;
+        public int getTotalCount() {
+            return totalCount;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public void setTotalCount(int totalCount) {
+            this.totalCount = totalCount;
         }
 
-        public String getName() {
-            return name;
+        public int getPageSize() {
+            return pageSize;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setPageSize(int pageSize) {
+            this.pageSize = pageSize;
         }
 
-        public String getIdNumber() {
-            return idNumber;
+        public int getTotalPage() {
+            return totalPage;
         }
 
-        public void setIdNumber(String idNumber) {
-            this.idNumber = idNumber;
+        public void setTotalPage(int totalPage) {
+            this.totalPage = totalPage;
         }
 
-        public String getCard() {
-            return card;
+        public int getCurrPage() {
+            return currPage;
         }
 
-        public void setCard(String card) {
-            this.card = card;
+        public void setCurrPage(int currPage) {
+            this.currPage = currPage;
         }
 
-        public String getBankname() {
-            return bankname;
+        public List<ListBean> getList() {
+            return list;
         }
 
-        public void setBankname(String bankname) {
-            this.bankname = bankname;
+        public void setList(List<ListBean> list) {
+            this.list = list;
         }
 
-        public String getBanktype() {
-            return banktype;
-        }
+        public static class ListBean {
+            /**
+             * id : 1
+             * tbUserId : 3
+             * bankName : 招商银行
+             * bankKind : 招商银行信用卡
+             * bankNumber : 6225756663322156
+             * reservedNumber : 15625226978
+             * bankType : 信用卡
+             * bankCode : CMB
+             */
 
-        public void setBanktype(String banktype) {
-            this.banktype = banktype;
-        }
+            private int id;
+            private int tbUserId;
+            private String bankName;
+            private String bankKind;
+            private String bankNumber;
+            private String reservedNumber;
+            private String bankType;
+            private String bankCode;
 
-        public String getPhone() {
-            return phone;
-        }
+            public int getId() {
+                return id;
+            }
 
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
+            public void setId(int id) {
+                this.id = id;
+            }
 
-        public Object getUserId() {
-            return userId;
-        }
+            public int getTbUserId() {
+                return tbUserId;
+            }
 
-        public void setUserId(Object userId) {
-            this.userId = userId;
-        }
+            public void setTbUserId(int tbUserId) {
+                this.tbUserId = tbUserId;
+            }
 
-        public String getCreateTime() {
-            return createTime;
-        }
+            public String getBankName() {
+                return bankName;
+            }
 
-        public void setCreateTime(String createTime) {
-            this.createTime = createTime;
-        }
+            public void setBankName(String bankName) {
+                this.bankName = bankName;
+            }
 
-        public String getUserMobile() {
-            return userMobile;
-        }
+            public String getBankKind() {
+                return bankKind;
+            }
 
-        public void setUserMobile(String userMobile) {
-            this.userMobile = userMobile;
+            public void setBankKind(String bankKind) {
+                this.bankKind = bankKind;
+            }
+
+            public String getBankNumber() {
+                return bankNumber;
+            }
+
+            public void setBankNumber(String bankNumber) {
+                this.bankNumber = bankNumber;
+            }
+
+            public String getReservedNumber() {
+                return reservedNumber;
+            }
+
+            public void setReservedNumber(String reservedNumber) {
+                this.reservedNumber = reservedNumber;
+            }
+
+            public String getBankType() {
+                return bankType;
+            }
+
+            public void setBankType(String bankType) {
+                this.bankType = bankType;
+            }
+
+            public String getBankCode() {
+                return bankCode;
+            }
+
+            public void setBankCode(String bankCode) {
+                this.bankCode = bankCode;
+            }
         }
     }
 }

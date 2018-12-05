@@ -21,14 +21,16 @@ import com.baidu.idl.face.platform.LivenessTypeEnum;
 import com.example.administrator.dataecs.MyApplication;
 import com.example.administrator.dataecs.R;
 import com.example.administrator.dataecs.inte.AllInte;
-import com.example.administrator.dataecs.model.TaoBaoRequestModel;
+import com.example.administrator.dataecs.model.PerfectTypeModel;
 import com.example.administrator.dataecs.util.BaseServer;
 import com.example.administrator.dataecs.util.Config;
+import com.example.administrator.dataecs.util.ConfigUtil;
 import com.example.administrator.dataecs.util.Constants;
 import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.StartXYSDKUtil;
 import com.example.administrator.dataecs.util.SystemUntils;
 import com.example.administrator.dataecs.util.ToastUntils;
+import com.xinyan.bigdata.XinYanSDK;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
 import com.yanzhenjie.permission.Rationale;
@@ -91,11 +93,12 @@ public class DataPerfectActivity extends AppCompatActivity {
         setContentView(R.layout.data_attantin_lay);
         ButterKnife.bind(this);
         intView();
+//        getType();
     }
 
     private void intView() {
         title.setText("资料认证");
-        loadingTxt.setText("跳转中...");
+
         back.setVisibility(View.VISIBLE);
 
         //百度api的添加活体动作
@@ -112,17 +115,8 @@ public class DataPerfectActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        isMyelfInfoPerfect = (boolean) SPUtils.get(this, Config.ID_INFOMATION_PERFECT, false);
-        isPhonePerfect = (boolean) SPUtils.get(this, Config.PHONE_STORE_PERFECT, false);
-        isTaoBaoPerfect = (boolean) SPUtils.get(this, Config.TAO_BAO_PERFECT, false);
-        isFacePerfect = (boolean) SPUtils.get(this, Config.FACE_FOUSE_PERFECT, false);
-        isIDCardPerfect = (boolean) SPUtils.get(this, Config.ID_CARD_PERFECT, false);
-
-        idInformationType.setText(isMyelfInfoPerfect ? "已完善" : "未完善");
-        phoneStoreType.setText(isPhonePerfect ? "已完善" : "未完善");
-        taoBaoType.setText(isTaoBaoPerfect ? "已完善" : "未完善");
-        faceFouseType.setText(isFacePerfect ? "已完善" : "未完善");
-        idCardType.setText(isIDCardPerfect ? "已完善" : "未完善");
+        
+        getType();
     }
 
     @OnClick({R.id.back, R.id.phone_store_relate, R.id.tao_bao_relate,
@@ -144,8 +138,27 @@ public class DataPerfectActivity extends AppCompatActivity {
 
                 if (!isPhonePerfect) {
 
-                    Intent intent=new Intent(DataPerfectActivity.this,PhoneStoreActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(DataPerfectActivity.this, PhoneStoreActivity.class);
+//                    startActivity(intent);
+                    ConfigUtil.idcard = "";
+                    ConfigUtil.realname = "";
+                    ConfigUtil.phoneNum = "";
+                    ConfigUtil.phoneServerCode = "";
+
+//                ConfigUtil.idcard = "330325197802264617";
+//                ConfigUtil.realname = "王克昌";
+//                ConfigUtil.phoneNum = "13682676171";
+//                ConfigUtil.phoneServerCode = "139222";
+                    ConfigUtil.carrierCanInput = Constants.YES;
+                    ConfigUtil.carrierIDandNameShow = Constants.YES;
+
+
+                    XinYanSDK.getInstance().setMerchantAttribute(Config.XyApiUser,
+                            Config.XyApiKey);
+                    StartXYSDKUtil.startSDK(DataPerfectActivity.this, Constants.Function.FUNCTION_CARRIER);
+//                XinYanSDK.getInstance().setMerchantAttribute(apiUser, apiKey);
+//                StartXYSDKUtil.startSDK(PhoneStoreActivity.this, Constants.Function.FUNCTION_CARRIER, Config.orderEn, false);
+
                 }
 
                 break;
@@ -154,9 +167,12 @@ public class DataPerfectActivity extends AppCompatActivity {
             case R.id.tao_bao_relate:
                 if (!isTaoBaoPerfect) {
                     //启动新颜SDK
+                    loadingTxt.setText("跳转中...");
                     loadingLay.setVisibility(View.VISIBLE);
-                    getXYorder();
-
+                    XinYanSDK.getInstance().setMerchantAttribute(Config.XyApiUser,
+                            Config.XyApiKey);
+                    StartXYSDKUtil.startSDK(DataPerfectActivity.this,
+                            Constants.Function.FUNCTION_TAOBAOPAY);
                 }
                 break;
 
@@ -183,39 +199,64 @@ public class DataPerfectActivity extends AppCompatActivity {
         }
     }
 
-    //获取新颜的订单号(淘宝认证)
-    public void getXYorder() {
+    //获取认证状态
+    public void getType() {
         if (!SystemUntils.isNetworkConnected(this)) {
-            Toast.makeText(this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DataPerfectActivity.this, "网络已断开,请检查你的网络!", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        loadingTxt.setText("加载中...");
+        loadingLay.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BaseServer.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         final AllInte inte = retrofit.create(AllInte.class);
-        Call<TaoBaoRequestModel> call = inte.getTaoBaoInfo();
-        call.enqueue(new Callback<TaoBaoRequestModel>() {
+        Call<PerfectTypeModel> call = inte.getPerfectType((long) SPUtils.get(DataPerfectActivity.this, Config.USED_ID, 1L));
+        call.enqueue(new Callback<PerfectTypeModel>() {
             @Override
-            public void onResponse(Call<TaoBaoRequestModel> call, Response<TaoBaoRequestModel> response) {
-                loadingLay.setVisibility(View.GONE);
-                TaoBaoRequestModel model=response.body();
-                if (model.getCode()==0){
+            public void onResponse(Call<PerfectTypeModel> call, Response<PerfectTypeModel> response) {
+                PerfectTypeModel model = response.body();
+                if ("success".equals(model.getMsg())) {
 
-                    StartXYSDKUtil.startSDK(DataPerfectActivity.this, model.getMap().getMember_id(), model.getMap().getTerminal_id(),
-                            Constants.Function.FUNCTION_TAOBAOPAY, model.getMap().getPrepay_id(), Config.orderEn,true);
-                }else {
-                    ToastUntils.ToastShort(DataPerfectActivity.this,"后台请求失败！");
+                    SPUtils.put(DataPerfectActivity.this, Config.ID_INFOMATION_PERFECT,
+                            model.getUserStatus().getDataStatus() == 0 ? false : true);
+                    SPUtils.put(DataPerfectActivity.this, Config.PHONE_STORE_PERFECT,
+                            model.getUserStatus().getOperatorStatus() == 0 ? false : true);
+                    SPUtils.put(DataPerfectActivity.this, Config.TAO_BAO_PERFECT,
+                            model.getUserStatus().getZhifubaoStatus() == 0 ? false : true);
+                    SPUtils.put(DataPerfectActivity.this, Config.FACE_FOUSE_PERFECT,
+                            model.getUserStatus().getFaceStatus() == 0 ? false : true);
+                    SPUtils.put(DataPerfectActivity.this, Config.ID_CARD_PERFECT,
+                            model.getUserStatus().getIdCardStatus() == 0 ? false : true);
+
+                    isMyelfInfoPerfect = (boolean) SPUtils.get(DataPerfectActivity.this, Config.ID_INFOMATION_PERFECT, false);
+                    isPhonePerfect = (boolean) SPUtils.get(DataPerfectActivity.this, Config.PHONE_STORE_PERFECT, false);
+                    isTaoBaoPerfect = (boolean) SPUtils.get(DataPerfectActivity.this, Config.TAO_BAO_PERFECT, false);
+                    isFacePerfect = (boolean) SPUtils.get(DataPerfectActivity.this, Config.FACE_FOUSE_PERFECT, false);
+                    isIDCardPerfect = (boolean) SPUtils.get(DataPerfectActivity.this, Config.ID_CARD_PERFECT, false);
+
+                    idInformationType.setText(isMyelfInfoPerfect ? "已完善" : "未完善");
+                    phoneStoreType.setText(isPhonePerfect ? "已完善" : "未完善");
+                    taoBaoType.setText(isTaoBaoPerfect ? "已完善" : "未完善");
+                    faceFouseType.setText(isFacePerfect ? "已完善" : "未完善");
+                    idCardType.setText(isIDCardPerfect ? "已完善" : "未完善");
+
+                    loadingLay.setVisibility(View.GONE);
+                } else {
+                    ToastUntils.ToastShort(DataPerfectActivity.this, "请求失败！");
+                    loadingLay.setVisibility(View.GONE);
                 }
             }
 
             @Override
-            public void onFailure(Call<TaoBaoRequestModel> call, Throwable t) {
-                ToastUntils.ToastShort(DataPerfectActivity.this,"请求失败！"+t.toString());
+            public void onFailure(Call<PerfectTypeModel> call, Throwable t) {
+                ToastUntils.ToastShort(DataPerfectActivity.this, "请求失败！" + t.toString());
+                loadingLay.setVisibility(View.GONE);
             }
         });
+
     }
 
     //-------------------------------------------权限检测开始---------------------------------------------------------------------//

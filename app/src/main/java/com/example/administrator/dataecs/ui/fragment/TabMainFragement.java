@@ -191,11 +191,11 @@ public class TabMainFragement extends Fragment implements View.OnClickListener {
         smartRefres.autoRefresh();
 
         //首页跑马灯的轮播信息
-        marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content1, "137*****336", "成功申福到了获得2000元")));
+        marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content, "","137*****336", "成功申福到了获得2000元")));
         marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content1, "186*****895", "成功申请金库获得5000元")));
         marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content1, "134*****327", "成功申请钱袋获得7000元")));
-        marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content1, "135*****236", "成功申请金库获得3000元")));
         marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content1, "185*****089", "成功申请55红包获得8000元")));
+        marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content1, "135*****236", "成功申请金库获得3000元")));
         marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content1, "137*****681", "成功申请速借获得4000元")));
         marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content1, "134*****532", "成功申请金库获得6000元")));
         marqueeContent.add(Html.fromHtml(getResources().getString(R.string.content1, "137*****892", "成功申请速借获得2000元")));

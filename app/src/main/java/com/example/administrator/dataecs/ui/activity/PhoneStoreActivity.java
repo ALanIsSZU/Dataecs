@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.administrator.dataecs.R;
@@ -49,10 +50,11 @@ public class PhoneStoreActivity extends AppCompatActivity {
     EditText kfpwd;
     @BindView(R.id.next)
     Button next;
+    @BindView(R.id.inputSwitch)
+    Switch inputSwitch;
+    @BindView(R.id.idnameinputSwitch)
+    Switch idnameinputSwitch;
 
-    //新颜的apiUser和apiKey
-    private String apiUser = "8150716192";
-    private String apiKey = "f275fde017e44bb29f79f186dcfe3422";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,14 +103,28 @@ public class PhoneStoreActivity extends AppCompatActivity {
                 ConfigUtil.realname = xinyanUsername.getText().toString().replaceAll(" ", "");
                 ConfigUtil.phoneNum = xinyanphonenum.getText().toString().replaceAll(" ", "");
                 ConfigUtil.phoneServerCode = fwpwd.getText().toString().replaceAll(" ", "");
+
+//                ConfigUtil.idcard = "330325197802264617";
+//                ConfigUtil.realname = "王克昌";
+//                ConfigUtil.phoneNum = "13682676171";
+//                ConfigUtil.phoneServerCode = "139222";
                 ConfigUtil.carrierCanInput = Constants.YES;
                 ConfigUtil.carrierIDandNameShow = Constants.YES;
 
-                XinYanSDK.getInstance().setMerchantAttribute(apiUser, apiKey);
-                StartXYSDKUtil.startSDK(PhoneStoreActivity.this, Constants.Function.FUNCTION_CARRIER, Config.orderEn, false);
+//                XinYanSDK.getInstance().setMerchantAttribute(apiUser, apiKey);
+//                StartXYSDKUtil.startSDK(PhoneStoreActivity.this, Constants.Function.FUNCTION_CARRIER, Config.orderEn, false);
+
+                XinYanSDK.getInstance().setMerchantAttribute(Config.XyApiUser,
+                        Config.XyApiKey);
+                StartXYSDKUtil.startSDK(PhoneStoreActivity.this, Constants.Function.FUNCTION_CARRIER);
                 finish();
                 break;
 
         }
+    }
+
+    @OnClick(R.id.back)
+    public void onViewClicked() {
+        finish();
     }
 }

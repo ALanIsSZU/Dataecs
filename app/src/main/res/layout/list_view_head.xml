@@ -34,7 +34,7 @@
             app:mvInterval="3000"
             app:mvSingleLine="true"
             app:mvTextColor="@color/black"
-            app:mvTextSize="12sp" />
+            app:mvTextSize="15sp" />
     </LinearLayout>
 
     <LinearLayout

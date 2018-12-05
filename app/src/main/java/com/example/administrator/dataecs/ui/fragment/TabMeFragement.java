@@ -14,11 +14,11 @@ import android.widget.TextView;
 import com.example.administrator.dataecs.R;
 import com.example.administrator.dataecs.ui.activity.BanckCordActivity;
 import com.example.administrator.dataecs.ui.activity.DataPerfectActivity;
+import com.example.administrator.dataecs.ui.activity.HelpActivity;
 import com.example.administrator.dataecs.ui.activity.InformationActivity;
 import com.example.administrator.dataecs.ui.activity.LoginActivity;
 import com.example.administrator.dataecs.ui.activity.RecordActivity;
 import com.example.administrator.dataecs.ui.activity.SettingActivity;
-import com.example.administrator.dataecs.util.BaseServer;
 import com.example.administrator.dataecs.util.Config;
 import com.example.administrator.dataecs.util.SPUtils;
 
@@ -57,6 +57,8 @@ public class TabMeFragement extends Fragment {
     TextView idInformationType;
     @BindView(R.id.attestation_type)
     ImageView attestationType;
+    @BindView(R.id.help_center)
+    RelativeLayout helpCenter;
     Unbinder unbinder;
 
 
@@ -81,12 +83,12 @@ public class TabMeFragement extends Fragment {
     }
 
     @OnClick({R.id.login_tab, R.id.record, R.id.setting,
-            R.id.back_information, R.id.id_information, R.id.information})
+            R.id.back_information, R.id.id_information, R.id.information, R.id.help_center})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //登录
             case R.id.login_tab:
-                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
+                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE, ""))) {
                     Intent run = new Intent(getActivity(), LoginActivity.class);
                     getActivity().startActivity(run);
                 } else {
@@ -97,22 +99,23 @@ public class TabMeFragement extends Fragment {
             //我的账户
             case R.id.back_information:
 
-                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
+                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE, ""))) {
 
                     Intent inten3 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(inten3);
 
                 } else {
                     Intent backInformation = new Intent(getActivity(), BanckCordActivity.class);
-                    startActivity(backInformation);
+                    backInformation.putExtra("type", false);
+                    startActivityForResult(backInformation,Config.ME_TO_BANCK);
                 }
 
                 break;
 
-            //身份证认证
+            //资料认证
             case R.id.id_information:
 
-                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
+                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE, ""))) {
 
                     Intent inten3 = new Intent(getActivity(), LoginActivity.class);
                     startActivity(inten3);
@@ -131,11 +134,12 @@ public class TabMeFragement extends Fragment {
             //借款记录
             case R.id.record:
 
-                if (!"".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
+                if (!"".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE, ""))) {
                     Intent intent = new Intent(getActivity(), RecordActivity.class);
                     getActivity().startActivity(intent);
                 } else {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.putExtra("isBackRefresh",false);
                     getActivity().startActivity(intent);
                 }
 
@@ -143,20 +147,24 @@ public class TabMeFragement extends Fragment {
 
             //消息中心
             case R.id.information:
-                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE,""))) {
-
-                    Intent inten3 = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(inten3);
-
-                } else {
+//                if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE, ""))) {
+//
+//                    Intent inten3 = new Intent(getActivity(), LoginActivity.class);
+//                    startActivity(inten3);
+//
+//                } else {
 
                     Intent information = new Intent(getActivity(), InformationActivity.class);
                     getActivity().startActivity(information);
-                }
+//                }
 
                 break;
 
-            //关于我们
+            //帮助中心
+            case R.id.help_center:
+                Intent help = new Intent(getActivity(), HelpActivity.class);
+                getActivity().startActivity(help);
+                break;//关于我们
             case R.id.setting:
                 Intent intent1 = new Intent(getActivity(), SettingActivity.class);
                 getActivity().startActivity(intent1);
@@ -169,25 +177,35 @@ public class TabMeFragement extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if ("".equals(SPUtils.get(getActivity(),Config.TOKEN_VALUE,""))) {
+        //认证状态
+        boolean taoBao = (boolean) SPUtils.get(getActivity(), Config.TAO_BAO_PERFECT, false);
+        boolean idCard = (boolean) SPUtils.get(getActivity(), Config.ID_CARD_PERFECT, false);
+        boolean idInfo = (boolean) SPUtils.get(getActivity(), Config.ID_INFOMATION_PERFECT, false);
+        boolean phone = (boolean) SPUtils.get(getActivity(), Config.PHONE_STORE_PERFECT, false);
+        boolean face = (boolean) SPUtils.get(getActivity(), Config.FACE_FOUSE_PERFECT, false);
+        boolean banck = (boolean) SPUtils.get(getActivity(), Config.BANCK_PERFECT, false);
+
+        if ("".equals(SPUtils.get(getActivity(), Config.TOKEN_VALUE, ""))) {
             useName.setText("请登陆");
             attestationType.setVisibility(View.GONE);
+            backInformationType.setVisibility(View.GONE);
+            idInformationType.setVisibility(View.GONE);
+
         } else {
 
-            useName.setText((String)SPUtils.get(getActivity(),Config.PHONE_VALUE,""));
+            useName.setText((String) SPUtils.get(getActivity(), Config.PHONE_VALUE, ""));
             attestationType.setVisibility(View.VISIBLE);
+            backInformationType.setVisibility(View.VISIBLE);
+            idInformationType.setVisibility(View.VISIBLE);
 
-            if ((Boolean) SPUtils.get(getActivity(), BaseServer.BANCK_INFORMATION, false) &&
-                    (boolean) SPUtils.get(getActivity(), BaseServer.ID_INFORMATION, false)) {
+            if (taoBao && idCard && idInfo && phone && face && banck) {
                 attestationType.setImageResource(R.drawable.personal_info_verification);
             } else {
                 attestationType.setImageResource(R.drawable.wei_ren_zheng);
             }
 
-            backInformationType.setText((boolean) SPUtils.get(getActivity(), BaseServer.BANCK_INFORMATION, false)
-                    ? "已完善" : "未完善");
-            idInformationType.setText((boolean) SPUtils.get(getActivity(), BaseServer.ID_INFORMATION, false)
-                    ? "已完善" : "未完善");
+            backInformationType.setText(banck ? "已完善" : "未完善");
+            idInformationType.setText(taoBao && idCard && idInfo && phone && face ? "已完善" : "未完善");
         }
 
 

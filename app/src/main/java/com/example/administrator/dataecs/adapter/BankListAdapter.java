@@ -17,9 +17,9 @@ public class BankListAdapter extends BaseAdapter{
 
 
     private Context context;
-    private List<BankInfoModel.ListBean> list;
+    private List<BankInfoModel.PageBean.ListBean> list;
 
-    public BankListAdapter(Context context,List<BankInfoModel.ListBean> list){
+    public BankListAdapter(Context context,List<BankInfoModel.PageBean.ListBean> list){
         this.context=context;
         this.list=list;
     }
@@ -53,10 +53,10 @@ public class BankListAdapter extends BaseAdapter{
         }else {
             holder= (viewHolder) convertView.getTag();
         }
-
-        holder.bankNumber.setText(list.get(position).getCard());
-        holder.banktype.setText(list.get(position).getBanktype());
-        holder.bankName.setText(list.get(position).getBankname());
+        String banck=list.get(position).getBankNumber().substring(list.get(position).getBankNumber().length()-4,list.get(position).getBankNumber().length());
+        holder.bankNumber.setText("**** **** **** "+banck);
+        holder.banktype.setText(list.get(position).getBankType());
+        holder.bankName.setText(list.get(position).getBankName());
 
         return convertView;
     }

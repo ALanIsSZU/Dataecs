@@ -20,7 +20,9 @@ import com.example.administrator.dataecs.ui.fragment.TabMainFragement;
 import com.example.administrator.dataecs.ui.fragment.TabMeFragement;
 import com.example.administrator.dataecs.ui.fragment.TabShenQingFragement;
 import com.example.administrator.dataecs.util.BaseServer;
+import com.example.administrator.dataecs.util.Config;
 import com.example.administrator.dataecs.util.DownLoadUntils;
+import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.SharePreferencesUtil;
 import com.example.administrator.dataecs.util.SystemUntils;
 import com.example.administrator.dataecs.util.Tools;
@@ -90,10 +92,17 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //获取app的版本号
 //        getSysmtemNumber();
-        //获取审核状态
-        if (!SharePreferencesUtil.getUserName(this).equals("")) {
-//            getSHType(SharePreferencesUtil.getUserName(this));
+
+        //申请界面的判断
+        if ("".equals(SPUtils.get(MainActivity.this, Config.TOKEN_VALUE, ""))) {
+            SharePreferencesUtil.saveShenQing(MainActivity.this, 4);
+
+            SPUtils.put(MainActivity.this, Config.IS_FINISH_APP, true);
+        } else {
+            SharePreferencesUtil.saveShenQing(MainActivity.this, 0);
+            SPUtils.put(MainActivity.this, Config.IS_FINISH_APP, true);
         }
+
         intView();
     }
 
@@ -264,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
     //获取审核状态
     public void getSHType(String phone) {

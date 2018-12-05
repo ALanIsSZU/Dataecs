@@ -111,18 +111,12 @@ public class TaoBaoActivity extends Activity {
 
     private void initData() {
         try {
-            if ("test".equals(ConfigUtil.environment)) {
-                baseResulturl = "https://test.xinyan.com/data/";
-            }
-            if ("product".equals(ConfigUtil.environment)) {
-                baseResulturl = "https://api.xinyan.com/data/";
-            }
-            XinyanCallBackData xinyanCallBackData = (XinyanCallBackData) getIntent().getExtras().get("data");
+            baseResulturl = "https://api.xinyan.com/data";
+            XinyanCallBackData xinyanCallBackData =
+                    (XinyanCallBackData) getIntent().getExtras().get("data");
             stringBuffer = new StringBuffer();
-            stringBuffer.append("订单ID:" + ConfigUtil.tradeNo + "\n");
             stringBuffer.append("任务ID:" + xinyanCallBackData.getToken() + "\n");
             stringBuffer.append("任务消息:" + xinyanCallBackData.getMessage() + "\n");
-            Log.d("123", "taskType:" + xinyanCallBackData.getTaskType() + "==========" + "code" + xinyanCallBackData.getCode());
             tvResult.setText(stringBuffer.toString());
 
             if ("YES".equals(ConfigUtil.titleConfig.getLoginSuccessQuit())) {//登录退出模式，结果需要自己轮询解析的状态，然后再获取结果
@@ -171,38 +165,9 @@ public class TaoBaoActivity extends Activity {
     }
 
     private String getResulturl() {
-        if (Constants.Function.FUNCTION_TAOBAO.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.TAOBAO_RESULT_URL;
-        } else if (Constants.Function.FUNCTION_ALIPAY.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.ALIPAY_RESULT_URL;
-        } else if (Constants.Function.FUNCTION_JINGDONG.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.JINGDONG_RESULT_URL;
-        } else if (Constants.Function.FUNCTION_CARRIER.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.CARRIER_RESULT_URL;//https://api.xinyan.com/data/carrier/v2/mobile/201805222136590131070693?mobile=
-        } else if (Constants.Function.FUNCTION_QQ.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.QQ_RESULT_URL;//https://api.xinyan.com/data/qq/v1/alldata/{tradeNo}
-        } else if (Constants.Function.FUNCTION_FUND.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.FUND_RESULT_URL;
-        } else if (Constants.Function.FUNCTION_CHSI.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.CHIS_RESULT_URL;//data/chsi/v1/all/{tradeNO}
-        } else if (Constants.Function.FUNCTION_DIDI.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.DIDI_RESULT_URL;///data/chsi/v1/all/{tradeNO}
-        } else if (Constants.Function.FUNCTION_SECURITY.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.SECURITY_RESULT_URL;
-        } else if (Constants.Function.FUNCTION_ONLINE_BANK.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.BANK_RESULT_URL;
-        } else if (Constants.Function.FUNCTION_TAOBAOPAY.equals(ConfigUtil.type)) {
-            url = baseResulturl + Constants.UrlManager.TAOBAOPAY_RESULT_URL;
-        }
-        url = url.replaceAll("\\{[^}]*\\}", ConfigUtil.tradeNo);
         // new service
         if (Tools.isNewService(ConfigUtil.type)) {
-            if (Constants.UrlManager.EN_TEST.equals(ConfigUtil.environment)) {
-                baseResulturl = Constants.UrlManager.BASE_TEST_NEW_SERVICERESULTURL;
-            }
-            if (Constants.UrlManager.EN_PRODUCT.equals(ConfigUtil.environment)) {
-                baseResulturl = Constants.UrlManager.BASE_PRODUCT_NEW_SERVICERESULTURL;
-            }
+            baseResulturl = "https://qz.xinyan.com";
             url = baseResulturl + Constants.UrlManager.NEW_SERVICE_RESULT_URL;
             url = String.format(url, XinYanSDK.getInstance().getApiUser(),
                     XinYanSDK.getInstance().getApiEnc(), ConfigUtil.token);

@@ -1,167 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEDED"
-    android:orientation="vertical">
+    android:background="#EDEDED">
 
-    <include layout="@layout/title_layout" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="5dp"
-        android:text="请绑定持卡人本人的银行卡"
-        android:textSize="12sp"
-        android:drawableLeft="@drawable/icon_horn"
-        android:drawablePadding="5dp"
-        android:textColor="@color/tip_n"/>
-
+    <include
+        android:id="@+id/title_lay"
+        layout="@layout/title_layout" />
     <LinearLayout
+        android:id="@+id/content_lay"
+        android:layout_below="@+id/title_lay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:padding="15dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="5dp"
+            android:text="银行卡身份证必须与认证资料的身份证一致"
+            android:textSize="12sp"
+            android:drawableLeft="@drawable/icon_horn"
+            android:drawablePadding="5dp"
+            android:textColor="@color/tip_n"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="17dp"
+                android:text="持卡人"/>
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="请输入姓名"
+                android:maxLines="1"
+                android:textColor="@color/text_default_d"
+                android:textColorHint="@color/tip_n"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/underline_n" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="17dp"
+                android:text="银行卡号"/>
+
+            <EditText
+                android:id="@+id/yinhanka"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="请输入银行卡号"
+                android:maxLines="1"
+                android:inputType="number"
+                android:textColor="@color/text_default_d"
+                android:textColorHint="@color/tip_n"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/underline_n"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="17dp"
+                android:text="身份证"/>
+
+            <EditText
+                android:id="@+id/id_cord"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="输入身份证号"
+                android:maxLines="1"
+                android:textColor="@color/text_default_d"
+                android:textColorHint="@color/tip_n"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/underline_n"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="17dp"
+                android:text="手机"/>
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="请输入银行预留手机号码"
+                android:maxLines="1"
+                android:inputType="number"
+                android:textColor="@color/text_default_d"
+                android:textColorHint="@color/tip_n"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="#333333"
-            android:textSize="17dp"
-            android:text="持卡人"/>
-
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="请输入姓名"
-            android:maxLines="1"
-            android:textColor="@color/text_default_d"
-            android:textColorHint="@color/tip_n"
-            android:textSize="16sp" />
-
+            android:id="@+id/commit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/btn_background"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="52dp"
+            android:gravity="center"
+            android:text="提交"
+            android:textColor="#fff"
+            android:textSize="15dp" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/underline_n" />
+    <include
+        android:id="@+id/loading_lay"
+        layout="@layout/loading_layout"
+        android:visibility="gone"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="#333333"
-            android:textSize="17dp"
-            android:text="卡号"/>
-
-        <EditText
-            android:id="@+id/yinhanka"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="请输入银行卡号"
-            android:maxLines="1"
-            android:inputType="number"
-            android:textColor="@color/text_default_d"
-            android:textColorHint="@color/tip_n"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/underline_n"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="#333333"
-            android:textSize="17dp"
-            android:text="身份证"/>
-
-        <EditText
-            android:id="@+id/id_cord"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="输入身份证号"
-            android:maxLines="1"
-            android:textColor="@color/text_default_d"
-            android:textColorHint="@color/tip_n"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/underline_n"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="#333333"
-            android:textSize="17dp"
-            android:text="手机"/>
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="请输入银行预留手机号码"
-            android:maxLines="1"
-            android:inputType="number"
-            android:textColor="@color/text_default_d"
-            android:textColorHint="@color/tip_n"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/commit_btn"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/btn_background"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="52dp"
-        android:gravity="center"
-        android:text="提交"
-        android:textColor="#fff"
-        android:textSize="15dp" />
-
-
-</LinearLayout>
+</RelativeLayout>

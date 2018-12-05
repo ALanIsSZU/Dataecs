@@ -10,6 +10,10 @@ import android.util.Base64;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -18,8 +22,29 @@ import java.util.UUID;
 
 public class Tools {
 
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
     public static boolean isNewService(String type) {
-        if (Constants.Function.FUNCTION_CARRIER.equals(type)||Constants.Function.FUNCTION_YOUPINGZHENG.equals(type)) {
+        if (Constants.Function.FUNCTION_CARRIER.equals(type)
+                || Constants.Function.FUNCTION_YOUPINGZHENG.equals(type)
+                || Constants.Function.FUNCTION_JINJIEDAO.equals(type)
+                || Constants.Function.FUNCTION_TAOBAO.equals(type)
+                || Constants.Function.FUNCTION_TAOBAOPAY.equals(type)
+                || Constants.Function.FUNCTION_ALIPAY.equals(type)) {
             return true;
         } else {
             return false;
@@ -30,6 +55,46 @@ public class Tools {
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         return uuid;
     }
+
+    public static String getSpecifiedDayAfter(String specifiedDay, int afterDays) {
+        Calendar c = Calendar.getInstance();
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yy-MM-dd").parse(specifiedDay);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.setTime(date);
+        int day = c.get(Calendar.DATE);
+        c.set(Calendar.DATE, day + afterDays);
+        String dayAfter = new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
+        return dayAfter;
+    }
+
+    public static String DateToString(int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, day); //向前走几天
+        Date date = calendar.getTime();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String str = sdf.format(date);
+
+        return str;
+    }
+
+    //把String转化为double
+    public static double convertToDouble(String number, double defaultValue) {
+        if (TextUtils.isEmpty(number)) {
+            return defaultValue;
+        }
+        try {
+            return Double.parseDouble(number);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+
+    }
+
 
     /**
      * @date 2017/8/24
@@ -123,7 +188,6 @@ public class Tools {
     }
 
 
-
     /**
      * 2 * 获取版本名
      */
@@ -143,17 +207,14 @@ public class Tools {
     /**
      * 获取应用程序名称
      */
-    public static String getAppName(Context context)
-    {
-        try
-        {
+    public static String getAppName(Context context) {
+        try {
             PackageManager packageManager = context.getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(
                     context.getPackageName(), 0);
             int labelRes = packageInfo.applicationInfo.labelRes;
             return context.getResources().getString(labelRes);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -161,28 +222,29 @@ public class Tools {
 
     /**
      * 将图片转换成Base64编码的字符串
+     *
      * @param path
      * @return base64编码的字符串
      */
-    public static String imageToBase64(String path){
-        if(TextUtils.isEmpty(path)){
+    public static String imageToBase64(String path) {
+        if (TextUtils.isEmpty(path)) {
             return null;
         }
         InputStream is = null;
         byte[] data = null;
         String result = null;
-        try{
+        try {
             is = new FileInputStream(path);
             //创建一个字符流大小的数组。
             data = new byte[is.available()];
             //写入数组
             is.read(data);
             //用默认的编码格式进行编码
-            result = Base64.encodeToString(data,Base64.DEFAULT);
-        }catch (IOException e){
+            result = Base64.encodeToString(data, Base64.DEFAULT);
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if(null !=is){
+        } finally {
+            if (null != is) {
                 try {
                     is.close();
                 } catch (IOException e) {
@@ -194,5 +256,12 @@ public class Tools {
         return result;
     }
 
+    public static void saveDay(Context context, int one, int two, int there, int four) {
 
+        SPUtils.put(context, Config.ONCE_SELECT_DAY, one);
+        SPUtils.put(context, Config.SECOND_SELECT_DAY, two);
+        SPUtils.put(context, Config.THIRD_SELECT_DAY, there);
+        SPUtils.put(context, Config.FOURTH_SELECT_DAY, four);
+
+    }
 }

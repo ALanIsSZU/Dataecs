@@ -76,7 +76,7 @@ dependencies {
     //支付宝
     implementation files('libs/alipaySdk-20180601.jar')
     //新颜的导包
-    implementation(name: 'xybigdatasdk-release-out1.9.1', ext: 'aar')
+    implementation(name: 'xybigdatasdk-release-out2.0.1', ext: 'aar')
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     //百度api（身份证识别）

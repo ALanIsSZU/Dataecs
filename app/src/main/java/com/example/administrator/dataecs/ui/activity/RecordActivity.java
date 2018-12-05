@@ -1,10 +1,12 @@
 package com.example.administrator.dataecs.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +17,8 @@ import com.example.administrator.dataecs.adapter.RecordAdapter;
 import com.example.administrator.dataecs.inte.AllInte;
 import com.example.administrator.dataecs.model.RecordMdel;
 import com.example.administrator.dataecs.util.BaseServer;
+import com.example.administrator.dataecs.util.Config;
+import com.example.administrator.dataecs.util.SPUtils;
 import com.example.administrator.dataecs.util.SharePreferencesUtil;
 import com.example.administrator.dataecs.util.SystemUntils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -65,6 +69,9 @@ public class RecordActivity extends AppCompatActivity {
     //一次请求的条数
     private int pageSize = 10;
 
+    //回来是否刷新
+    boolean isBackRefresh;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,11 +84,22 @@ public class RecordActivity extends AppCompatActivity {
     private void intView() {
         back.setVisibility(View.VISIBLE);
         title.setText("借款记录");
+
+        isBackRefresh = getIntent().getBooleanExtra("isBackRefresh", false);
+
         list = new ArrayList<>();
         recordAdapter = new RecordAdapter(this, list);
         recordList.setAdapter(recordAdapter);
 
-
+        recordList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(RecordActivity.this, ShenQingActivity.class);
+                intent.putExtra("typeCode", list.get(position).getStatusCode());
+                intent.putExtra("content", list.get(position).getStatus());
+                startActivity(intent);
+            }
+        });
     }
 
     private void intData() {
@@ -122,7 +140,8 @@ public class RecordActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         final AllInte inte = retrofit.create(AllInte.class);
-        Call<RecordMdel> call = inte.getRecordInfo(phone, currentPage, pageSize);
+        Call<RecordMdel> call = inte.getRecordInfo((Long) SPUtils.get(RecordActivity.this, Config.USED_ID, 1L),
+                pageSize, currentPage);
         call.enqueue(new Callback<RecordMdel>() {
             @Override
             public void onResponse(Call<RecordMdel> call, Response<RecordMdel> response) {
@@ -174,6 +193,41 @@ public class RecordActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isBackRefresh) {
+            smartRefres.autoRefresh();
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode) {
+
+            case Config.HK_BACK_DATA:
+
+                if (requestCode == Config.DATA_TO_HK) {
+
+                    isBackRefresh = data.getBooleanExtra("HK_TO_DATA_SUPER", false);
+
+                }
+
+                break;
+            case Config.ZQ_BACK_DATA:
+
+                if (requestCode == Config.DATA_TO_ZQ) {
+                    isBackRefresh = data.getBooleanExtra("ZQ_TO_DATA_SUPER", false);
+                }
+
+                break;
+        }
+
     }
 
     @OnClick(R.id.back)

@@ -11,9 +11,9 @@ public class BaseServer {
     public static final int START_FAIL = 1002;
     public static final int REQUEST_Mail = 1003;
     public static final int MAIL_FAIL = 1004;
-    public static final int ID_CARD_FRONT=1015;
-    public static final int ID_CARD_BACK=1017;
-    public static final int ID_CARD_FAIL=1016;
+    public static final int ID_CARD_FRONT = 1015;
+    public static final int ID_CARD_BACK = 1017;
+    public static final int ID_CARD_FAIL = 1016;
 
     public static final int PERSON_CODE = 1005;
     public static final int JIN_JI_CODE = 1006;
@@ -31,16 +31,15 @@ public class BaseServer {
     public static final int FACE_FOCUS_FAIL = 1022;
 
 
-
     //SharePreferences的存储的关键字
     public static final String ID_INFORMATION = "ID_INFORMATION";
     public static final String BANCK_INFORMATION = "BANCK_INFORMATION";
     public static final String ALL_ATTESTATION = "ALL_ATTESTATION";
 
     //正服
-//    public static final String BASE_URL = "http://120.79.85.227:80/renren-fast/";
+    public static final String BASE_URL = "http://120.79.85.227:80/renren-fast/";
     //测服
-    public static final String BASE_URL = "http://192.168.0.168:8080/renren-fast/";
+//    public static final String BASE_URL = "http://192.168.0.168:8080/renren-fast/";
 
     //图片地址拼接
     public static final String BASE_PIC = "http://120.79.85.227";
@@ -86,13 +85,14 @@ public class BaseServer {
     /**
      * 用户协议
      */
-    public static final String YONGHU = "swagger/agreement.html";
+    public static final String YONGHU = BASE_URL+"swagger/agreement.html";
 
     /**
      * 获取用户记录
      */
 //    public static final String RECORD =  "app/getByPhone";
-    public static final String RECORD = "api/getLoanRecord";
+//    public static final String RECORD = "api/getLoanRecord";
+    public static final String RECORD = "app/indentrecord/list";
     /**
      * 提交资料申请
      */
@@ -100,7 +100,7 @@ public class BaseServer {
     /**
      * 查询审核状态
      */
-    public static final String CHECK_TYPE =  "app/auditStatus";
+    public static final String CHECK_TYPE = "app/auditStatus";
     /**
      * 立即申请(第二次贷款)
      */
@@ -108,7 +108,7 @@ public class BaseServer {
     /**
      * 提交工作信息
      */
-    public static final String COMPANY_COMMIT =  "app/addWorkInformation";
+    public static final String COMPANY_COMMIT = "app/addWorkInformation";
     /**
      * 获取紧急联系人列表
      */
@@ -116,15 +116,17 @@ public class BaseServer {
     /**
      * 提交紧急联系人信息
      */
-    public static final String COMMIT_JIN_JI_NIFO =  "app/addEmergent";
+//    public static final String COMMIT_JIN_JI_NIFO = "app/addEmergent";
+    public static final String COMMIT_JIN_JI_NIFO = "app/userdata/save";
     /**
      * 提交银行卡信息
      */
-    public static final String COMMIT_BANCK_INFO =  "api/setCard";
+    public static final String COMMIT_BANCK_INFO = "app/userbank/setBank";
     /**
      * 获取银行卡信息
      */
-    public static final String GET_BANCK_INFO = "api/getCardInfo";
+//    public static final String GET_BANCK_INFO = "api/getCardInfo";
+    public static final String GET_BANCK_INFO = "app/userbank/listInfo";
 
     /**
      * 获取验证中心全部信息完成状态
@@ -134,7 +136,7 @@ public class BaseServer {
     /**
      * 获取个人信息
      */
-    public static final String GET_PERSON_INFO =  "app/showPoolCilentInfo";
+    public static final String GET_PERSON_INFO = "app/showPoolCilentInfo";
 
     /**
      * 获取工作信息
@@ -144,7 +146,7 @@ public class BaseServer {
     /**
      * 获取支付宝的privatekey等信息
      */
-    public static final String GET_ZHI_FU_BAO_INFO =  "AppAlipay/getApiInfo";
+    public static final String GET_ZHI_FU_BAO_INFO = "AppAlipay/getApiInfo";
 
     /**
      * 获取跳转支付宝授权的URL
@@ -154,7 +156,7 @@ public class BaseServer {
     /**
      * 获取跳转支付宝授权的auth_info
      */
-    public static final String GO_ZHI_FU_AUTH_INFO =  "AppAlipay/getOrderInfo";
+    public static final String GO_ZHI_FU_AUTH_INFO = "AppAlipay/getOrderInfo";
 
     /**
      * 提交基本信息和资质要求
@@ -164,12 +166,12 @@ public class BaseServer {
     /**
      * 获取身份认证的信息
      */
-    public static final String REN_ZHEN_INFO =  "app/showPersonInfo";
+    public static final String REN_ZHEN_INFO = "app/showPersonInfo";
 
     /**
      * 注册
      */
-    public static final String REGISTER_INFO =  "app/register";
+    public static final String REGISTER_INFO = "app/register";
     /**
      * 找回密码
      */
@@ -186,4 +188,41 @@ public class BaseServer {
      * 淘宝认证
      */
     public static final String TAO_BAO_ATTESTATION = "app/XYencrypt";
+    /**
+     * 提交贷款
+     */
+    public static final String COMMIT_REPAY = "app/userindent/add";
+    /**
+     * 帮助中心
+     */
+    public static final String HELP_CENTER = "app/help/listInfo";
+    /**
+     * 申请展期
+     */
+    public static final String Z_Q_COMMIT = "app/userindentexpect/save";
+    /**
+     * 还款
+     */
+    public static final String REPAY_MONEY = "app/userindentrepayment/save";
+    /**
+     * 查看是否完善
+     */
+    public static final String PERFECT_TYPE = "app/userstatus/getUserStatus";
+    /**
+     * 获取个人资料数据
+     */
+    public static final String GET_ALL_PERSON_INFO = "app/userdata/dataInfo";
+    /**
+     * 获取消息
+     */
+    public static final String get_informaytion_content = "app/news/list";
+    /**
+     * 获取借款天数和利率
+     */
+    public static final String GET_ALL_INFO = "app/parameter/parameterInfo";
+    /**
+     * 获取借款协议的内容"(用户协议)
+     */
+    public static final String AGREEMENT_INFO = "app/agreement/agreementInfo";
+
 }
